@@ -7,7 +7,10 @@ export const advisorSignup = async (data) => {
     const response = await axios.post(`${API_URL}/signup`, data);
     return response.data;
   } catch (err) {
-    throw err.response.data;
+    if (err.response && err.response.data) {
+      throw err.response.data;
+    }
+    throw new Error('Network error or server unreachable');
   }
 };
 
@@ -18,7 +21,8 @@ export const advisorLogin = async (data) => {
   
     return response.data; // Return user data
   } catch (error) {
-    throw new Error(error.response.data.message || 'Signup failed');
+    const msg = error.response?.data?.message || error.message || 'Login failed';
+    throw new Error(msg);
   }
 };
 
@@ -47,7 +51,10 @@ export const submitEnquiry = async (data) => {
     const response = await axios.post(`${API_URL}/enquaries`, data);
     return response.data; // Return the response data
   } catch (err) {
-    throw err.response.data; // Throw the error response data
+    if (err.response && err.response.data) {
+      throw err.response.data;
+    }
+    throw new Error('Network error or server unreachable');
   }
 };
 
@@ -79,6 +86,6 @@ export const registerCustomer = async (customerId, registerData) => {
     const response = await axios.post(`${API_URL}/customers/${customerId}/register`, registerData);
     return response;
   } catch (err) {
-    throw err.response;
+    throw err.response || new Error('Network error');
   }
 };

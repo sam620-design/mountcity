@@ -8,6 +8,12 @@ function normalizeBase(base) {
 export function getApiBase() {
   const env = import.meta.env.VITE_API_BASE;
   if (env) return normalizeBase(env);
+
+  // Warning for production deployments using localhost default
+  if (typeof window !== 'undefined' && window.location.hostname !== 'localhost') {
+    console.warn('[API] Warning: No VITE_API_BASE environment variable found. Falling back to localhost:5000, which will likely fail on non-local browsers.');
+  }
+  
   return DEFAULT_API_BASE;
 }
 
