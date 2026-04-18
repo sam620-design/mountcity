@@ -1,0 +1,26 @@
+{
+    "version": 2,
+    "builds": [
+      { "src": "src/index.js", "use": "@vercel/node" }
+    ],
+    "routes": [
+      { "src": "/(.*)",
+       "dest": "src/index.js",
+        "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "https://nutan-housing-finance.onrender.com"
+        },
+        {
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, PUT, DELETE, OPTIONS"
+        },
+        {
+          "key": "Access-Control-Allow-Headers",
+          "value": "Content-Type, Authorization"
+        }
+      ]
+    }
+    ]
+  }
+  
