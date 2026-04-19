@@ -36,6 +36,24 @@ export const protectDev = (req, res, next) => {
   }
 };
 
+// ─── Dev OR Owner read middleware (for shared read-only routes) ──────────────
+export const protectDevOrOwner = (req, res, next) => {
+  try {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) return res.status(401).json({ message: 'No token provided.' });
+    const token = authHeader.split(' ')[1];
+    if (!token) return res.status(401).json({ message: 'No token provided.' });
+    const decoded = jwt.verify(token, JWT_SECRET);
+    if (decoded.portal !== 'dev' && decoded.portal !== 'owner') {
+      return res.status(403).json({ message: 'Dev or Owner portal access required.' });
+    }
+    req.portalRole = decoded.role || decoded.portal;
+    next();
+  } catch {
+    return res.status(401).json({ message: 'Invalid or expired token.' });
+  }
+};
+
 // ─── Owner/MyPanel middleware ─────────────────────────────────────────────────
 export const protectOwner = (req, res, next) => {
   try {

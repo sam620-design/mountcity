@@ -5,12 +5,12 @@ import {
   createAdvisor, deleteApplication, authorizeRegistration, resetAllAdvisorTotals, devAddPayment,
   devRecordAdvisorPayout
 } from '../controllers/devControllers.js';
-import { protectDev } from '../middlewares/authMiddleware.js';
+import { protectDev, protectDevOrOwner } from '../middlewares/authMiddleware.js';
 
 const router = express.Router();
 
 // All dev routes are protected — require a valid dev portal JWT
-router.get('/data', protectDev, getGlobalDevData);
+router.get('/data', protectDevOrOwner, getGlobalDevData);
 router.put('/verify', protectDev, verifyAdvisorNode);
 router.post('/reset-password', protectDev, overrideAdvisorCredentials);
 router.post('/authorize-registration', protectDev, authorizeRegistration);
