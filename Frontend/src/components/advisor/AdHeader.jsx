@@ -27,8 +27,8 @@ function AdHeader() {
           {/* Logo */}
           <Link to='/'>
             <div className="flex items-center">
-              <img src={Logo} alt="Nutan Housing Finance" className="md:w-16 md:h-8 w-12 h-6" />
-              <h1 className="text-lg lg:text-xl ml-3 font-extrabold text-slate-800 tracking-tight">NUTAN HOUSING</h1>
+              <img src={Logo} alt="Mount City Developers Pvt. Ltd." className="md:w-16 md:h-8 w-12 h-6" />
+              <h1 className="text-lg lg:text-xl ml-3 font-extrabold text-slate-800 tracking-tight">MOUNT CITY DEVELOPERS</h1>
             </div>
           </Link>
           

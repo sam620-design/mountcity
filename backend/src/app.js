@@ -3,6 +3,7 @@ import cors from 'cors';
 import advisorRoutes from './routes/advisorRoute.js';
 import devRoutes from './routes/devRoute.js';
 import authRoutes from './routes/authRoute.js';
+import plotRoutes from './routes/plotRoute.js';
 import { seedPortalConfig } from './models/PortalConfig.js';
 
 const app = express();
@@ -18,6 +19,7 @@ app.get('/api/test', (req, res) => { res.send('CORS is working!'); });
 app.use('/api/auth', authRoutes);
 app.use('/api/advisors', advisorRoutes);
 app.use('/api/dev', devRoutes);
+app.use('/api/plots', plotRoutes);
 
 app.get('/', (req, res) => { res.send('API is running...'); });
 

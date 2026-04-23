@@ -15,14 +15,14 @@ const projectsData = [
   },
   {
       id: 2,
-      title: "Commercial Complex",
+      title: "HI-Tech city",
       location:'Rajgir',
       description: "A commercial hub designed to meet the needs of modern businesses with high-end amenities and strategic location.",
       image: Pro2,
   },
   {
       id: 3,
-      title: "Residential Villas",
+      title: "Nutan Vatika",
       location:'Rajgir',
       description: "Exclusive residential villas offering a private and serene environment, perfect for family living.",
       image: Pro2,
@@ -46,9 +46,9 @@ function Projects() {
             <div className='bg-yellow-100'>
             <div className="max-w-7xl  mx-auto py-6 md:py-12    ">
 
-                <p className='text-md text-gray-900 leading-7 mb-6 mx-4 text-justify font-poppins'>At <span className='text-xl'>Nutan Housing Finance</span>, we take pride in redefining modern living through our innovative Housing projects that prioritize both quality and sustainability. Each of our Projects is meticulously designed to harmonize with the surrounding environment while providing residents with the ultimate in comfort and functionality. We understand that a home is more than just a place to live; it’s a sanctuary where life unfolds. That’s why our projects incorporate spacious layouts, modern amenities, and thoughtful details that cater to the diverse needs of families and individuals alike.
+                <p className='text-md text-gray-900 leading-7 mb-6 mx-4 text-justify font-poppins'>At <span className='text-xl'>Mount City Developers Pvt. Ltd.</span>, we take pride in redefining modern living through our innovative Housing projects that prioritize both quality and sustainability. Each of our Projects is meticulously designed to harmonize with the surrounding environment while providing residents with the ultimate in comfort and functionality. We understand that a home is more than just a place to live; it’s a sanctuary where life unfolds. That’s why our projects incorporate spacious layouts, modern amenities, and thoughtful details that cater to the diverse needs of families and individuals alike.
 <br/>
-Our commitment to sustainability is evident in our choice of eco-friendly materials and energy-efficient technologies, ensuring that our homes not only meet today’s standards but also contribute to a healthier planet for future generations. From urban apartments to serene suburban residences, each project reflects our dedication to creating vibrant communities where residents can thrive. We also emphasize accessibility and connectivity, strategically selecting locations that offer easy access to essential services - Parks, and Recreational facilities. Explore our portfolio to see how Nutan Housing is shaping the future of living—where innovation meets community, and every project is a step towards a more sustainable tomorrow...</p>
+Our commitment to sustainability is evident in our choice of eco-friendly materials and energy-efficient technologies, ensuring that our homes not only meet today’s standards but also contribute to a healthier planet for future generations. From urban apartments to serene suburban residences, each project reflects our dedication to creating vibrant communities where residents can thrive. We also emphasize accessibility and connectivity, strategically selecting locations that offer easy access to essential services - Parks, and Recreational facilities. Explore our portfolio to see how Mount City Developers is shaping the future of living—where innovation meets community, and every project is a step towards a more sustainable tomorrow...</p>
 </div>
 </div>
             {/* Ongoing Projects Section */}

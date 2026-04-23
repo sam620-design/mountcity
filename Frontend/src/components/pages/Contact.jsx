@@ -100,7 +100,7 @@ function Contact() {
               <div className="flex items-center">
                 <input type="checkbox" className="mr-2" required />
                 <p className="text-gray-600 text-sm">
-                  I authorize Nutan Housing Finance to contact me via Email, SMS, WhatsApp, and Call.
+                  I authorize Mount City Developers Pvt. Ltd. to contact me via Email, SMS, WhatsApp, and Call.
                 </p>
               </div>
 
@@ -135,7 +135,7 @@ function Contact() {
               </div>
               <div>
                 <h4 className="font-semibold md:text-lg text-md">Email Us</h4>
-                <p><a href='mailto:info@nutanhousing.com'>info@nutanhousing.com</a></p>
+                <p><a href='mailto:info@mountcitydevelopers.in'>info@mountcitydevelopers.in</a></p>
               </div>
             </div>
 

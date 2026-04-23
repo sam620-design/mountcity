@@ -106,15 +106,15 @@ function Career() {
 <br/><br/>
    
  
-    A clean and healthy atmosphere is the need of this era, and Nutan Housing pays equal attention to the surroundings, and beautifully landscaped gardens adorning our projects.
+    A clean and healthy atmosphere is the need of this era, and Mount City Developers pays equal attention to the surroundings, and beautifully landscaped gardens adorning our projects.
     
     With Eco-friendly construction, High-quality construction management, NA Plotting and implementation of the newest technology, we provide you with nothing but the best.
     
     Explore job openings, learn about our culture, and make a meaningful impact in real estate. 
     <br/><br/>
-    Take the next step in your career journey and join Nutan Housing today.
+    Take the next step in your career journey and join Mount City Developers today.
     
-         To shape the future of real estate and join our team, submit your CV to <a href="mailto:info@nutanhousing.com"><b>info@nutanhousing.com</b></a> We look forward to hearing from you!</p>
+         To shape the future of real estate and join our team, submit your CV to <a href="mailto:info@mountcitydevelopers.in"><b>info@mountcitydevelopers.in</b></a> We look forward to hearing from you!</p>
       </div>
     </div>
   </div>

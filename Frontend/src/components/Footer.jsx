@@ -13,8 +13,8 @@ function Footer({ openLogin, openEnq }) {
           <div className="space-y-4 items-center justify-center lg:max-w-xs md:border-1 md:border-r border-gray-400 text-center lg:text-left">
             <Link to=''>
               <div className="flex justify-center lg:justify-start">
-                <img src={Logo} alt="Nutan Housing Finance" className="w-10 h-6" />
-                <h2 className="text-md ml-2">Nutan Housing Finance</h2>
+                <img src={Logo} alt="Mount City Developers Pvt. Ltd." className="w-10 h-6" />
+                <h2 className="text-md ml-2">Mount City Developers Pvt. Ltd.</h2>
               </div>
             </Link>
             <div className="text-gray-400 text-sm">
@@ -24,7 +24,7 @@ function Footer({ openLogin, openEnq }) {
               </p>
               <p className='mt-2 gap-2 flex justify-center lg:justify-start'>
                 <MdEmail className='text-primary w-4 h-4' />
-                <a href="mailto:info@nutanhousing.com" className="hover:text-white">info@nutanhousing.com</a>
+                <a href="mailto:info@mountcitydevelopers.in" className="hover:text-white">info@mountcitydevelopers.in</a>
               </p>
               <p className='mt-2 gap-2 flex justify-center lg:justify-start'>
                 <MdPhone className='text-primary w-4 h-4' />
@@ -61,13 +61,13 @@ function Footer({ openLogin, openEnq }) {
           <div className='text-center lg:text-left lg:mx-auto'>
             <h3 className="text-bse font-semibold text-primary">Follow Us On</h3>
             <div className="flex justify-center lg:justify-start space-x-6 mt-4">
-              <a href="https://www.facebook.com/nutan.housing" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-primary">
+              <a href="#" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-primary">
                 <FaFacebookF size={24} />
               </a>
-              <a href="https://www.instagram.com/nutan.housing/" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-primary">
+              <a href="https://www.instagram.com/mountcity.developers/" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-primary">
                 <FaInstagram size={24} />
               </a>
-              <a href="https://www.youtube.com/@Nutan.housing" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-primary">
+              <a href="#" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-primary">
                 <FaYoutube size={24} />
               </a>
             </div>
@@ -76,7 +76,7 @@ function Footer({ openLogin, openEnq }) {
 
         {/* Footer Bottom */}
         <div className="mt-4 border-t border-gray-400 pt-4 text-center text-gray-400 text-sm">
-          <p>© Nutan Housing Finance 2024, All rights reserved.</p>
+          <p>© Mount City Developers Pvt. Ltd. 2024, All rights reserved.</p>
           <p>Developed by <a href="https://prachar.com" target="_blank" rel="noreferrer" className="hover:text-primary">prachar.com</a></p>
         </div>
       </footer>

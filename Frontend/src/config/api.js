@@ -21,3 +21,4 @@ export const apiBase = getApiBase();
 export const apiAdvisors = `${apiBase}/advisors`;
 export const apiDev = `${apiBase}/dev`;
 export const apiAuth = `${apiBase}/auth`;
+export const apiPlots = `${apiBase}/plots`;

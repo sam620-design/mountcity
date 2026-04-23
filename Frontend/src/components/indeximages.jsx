@@ -40,6 +40,8 @@ import Raj4 from '../assets/raj.jpg';
 import Raj5 from "../assets/kund.jpg"
 import Rin from '../assets/Infrastrcture.jpg'
 import Lsvg from '../assets/lodipur.svg'
+import HitechSvg from '../assets/hitechcity.svg'
+import VatikaSvg from '../assets/VATIKANEWFINAL.svg'
 // import DwgL from '../assets/lodipur new.dwg'
 export{
   Schoolimg,
@@ -63,5 +65,5 @@ export{
   Gmailimg,Whatsappimg,Phoneimg,
   Lodhipur
  ,Locimg,Blog1,Blog2,Blog3,Pro1,Pro2,Lpdf,
- Raj1,Raj2,Raj3,Raj4,Raj5,Rin
+ Raj1,Raj2,Raj3,Raj4,Raj5,Rin, HitechSvg, VatikaSvg
 }

@@ -26,7 +26,7 @@ const router = createBrowserRouter(
         <Route path='/enquire' element={<Enquire />} />
         <Route path='/projects/:id' element={<ProjectDetails />} />
         <Route path="/blogs/:id" element={<AllBlogs />} />
-        <Route path='/plot' element={<Plot />} />
+        <Route path='/plot/:projectId' element={<Plot />} />
         <Route path='/emi_calc' element={<Emi />} />
 
 

@@ -3,13 +3,13 @@ import { ReactTyped } from 'react-typed';
 import { Vid, Custom, Plotimg, Construct, School, Old, Park, Elec, Hall, Road, Hospital, Temple, Scrolltop,Nutanim,Expert } from '..';
 import { useOutletContext } from 'react-router-dom';
 const testimonialsData = [
-  { name: 'Amrendra Singh', testimonial: 'Nutan Housing transformed my dream of owning a home into reality! The entire process was seamless and enjoyable.' },
-  { name: 'Lalit Narayan Prasad', testimonial: 'The quality of the construction and the attention to detail is impressive. Highly recommend Nutan Housing!' },
-  { name: 'Ashish Ranjan', testimonial: 'Nutan Housing was fantastic! Great service, clear communication, and a friendly team. They helped me find my dream home effortlessly.' },
-  { name: 'Prem Kant', testimonial: "If you're looking for a dedicated and experienced real estate professional, look no further than Nutan Housing Finance." },
-  { name: 'Anil Verma', testimonial: "I felt confident and well-supported every step of the way. Highly recommend Nutan Housing Finance in Bihar." },
+  { name: 'Amrendra Singh', testimonial: 'Mount City Developers transformed my dream of owning a home into reality! The entire process was seamless and enjoyable.' },
+  { name: 'Lalit Narayan Prasad', testimonial: 'The quality of the construction and the attention to detail is impressive. Highly recommend Mount City Developers!' },
+  { name: 'Ashish Ranjan', testimonial: 'Mount City Developers was fantastic! Great service, clear communication, and a friendly team. They helped me find my dream home effortlessly.' },
+  { name: 'Prem Kant', testimonial: "If you're looking for a dedicated and experienced real estate professional, look no further than Mount City Developers Pvt. Ltd." },
+  { name: 'Anil Verma', testimonial: "I felt confident and well-supported every step of the way. Highly recommend Mount City Developers Pvt. Ltd. in Bihar." },
   { name: 'Praveen', testimonial: "They took the time to understand exactly what I was looking for and provided insightful advice throughout the process. Their responsiveness and attention to detail made everything so much easier and less stressful." },
-  { name: 'Surendra Prasad', testimonial: "Nutan Housing made my home-buying experience easy and stress-free. The team was helpful, professional, and found the perfect property." },
+  { name: 'Surendra Prasad', testimonial: "Mount City Developers made my home-buying experience easy and stress-free. The team was helpful, professional, and found the perfect property." },
   { name: 'Sunil Kumar', testimonial: "Their knowledge of the local market and their commitment to finding the right property for me were truly impressive. They were always available to answer questions and offer valuable insights, making the experience both smooth and enjoyable." },
   { name: 'Pawan', testimonial: "Their responsiveness and attention to detail made everything easier and less stressful." }
 ];
@@ -40,7 +40,7 @@ function Home() {
           <h1 className='text-xl md:text-5xl font-poppins font-semibold'>
         
         <ReactTyped
-          strings={["Welcome to Nutan Housing Finance ", "Home you Love, Financing you Trust", "The key to your new beginning"]}
+          strings={["Welcome to Mount City Developers Pvt. Ltd. ", "Home you Love, Financing you Trust", "The key to your new beginning"]}
          
           loop
           typeSpeed={60}
@@ -60,7 +60,7 @@ function Home() {
       {/* Marquee */}
       <div className="w-full overflow-hidden bg-secondary whitespace-nowrap ">
         <p className="animate-marquee text-2xl p-3 text-black font-poppins">
-          🎉 Welcome to Nutan Housing Finance! 🎉 Home Loans, Affordable Housing Loans, and much more!
+          🎉 Welcome to Mount City Developers Pvt. Ltd.! 🎉 Home Loans, Affordable Housing Loans, and much more!
         </p>
       </div>
 
@@ -69,11 +69,11 @@ function Home() {
         <h2 className="text-2xl lg:text-3xl font-bold text-center mb-8 text-primary">WHAT WE DO</h2>
         <div className=" mx-auto max-w-5xl items-stretch space-y-6 text-left sm:flex sm:space-y-0 sm:space-x-10 sm:text-center">
           {[{
-            title: "Construction", img: Construct, desc: "Nutan Housing delivers high-quality construction services, ensuring durable and efficient project execution."
+            title: "Construction", img: Construct, desc: "Mount City Developers delivers high-quality construction services, ensuring durable and efficient project execution."
           }, {
-            title: "Plot Selling", img: Plotimg, desc: "Nutan Housing offers prime plots for sale, providing ideal locations for residential and commercial development."
+            title: "Plot Selling", img: Plotimg, desc: "Mount City Developers offers prime plots for sale, providing ideal locations for residential and commercial development."
           }, {
-            title: "Custom Design", img: Custom, desc: "Nutan Housing specializes in custom designs, crafting personalized spaces that meet unique client preferences."
+            title: "Custom Design", img: Custom, desc: "Mount City Developers specializes in custom designs, crafting personalized spaces that meet unique client preferences."
           }].map((service, index) => (
             <div key={index} className="flex w-full items-center rounded-xl border border-black border-opacity-10 px-4 py-6 text-black duration-200 hover:border-opacity-0 hover:no-underline hover:shadow-lg dark:text-white dark:hover:bg-white dark:hover:bg-opacity-10 sm:flex-col sm:hover:shadow-2xl">
               <img src={service.img} alt={service.title} className="mr-4 w-20 md:w-auto sm:mr-0 sm:h-32 sm:w-32" />
@@ -86,26 +86,26 @@ function Home() {
         </div>
       </section>
 
-      {/* Nutan Housing Info */}
+      {/* Mount City Developers Info */}
       <section className="bg-yellow-100 mt-4 md:mt-14">
   <div className="container mx-auto max-w-7xl py-8 flex flex-col md:flex-row items-center">
     {/* Left Side Image */}
     <div className="md:w-1/2 w-full px-4">
       <img
         src={Nutanim} // Replace with the actual image path
-        alt="Nutan Housing Finance"
+        alt="Mount City Developers Pvt. Ltd."
         className="w-full h-auto "
       />
     </div>
 
     {/* Right Side Text */}
     <div className="md:w-1/2 w-full px-2 mt-6 md:mt-0 text-center md:text-left">
-      <h2 className="text-2xl lg:text-4xl font-bold text-primary mb-6">Building Your Dreams with Nutan Housing Finance</h2>
+      <h2 className="text-2xl lg:text-4xl font-bold text-primary mb-6">Building Your Dreams with Mount City Developers Pvt. Ltd.</h2>
       <p className="md:text-lg text-justify">
-        The company is one of the fastest-growing entities in the realty sector with a difference that offers luxury for reasonable costs, excellent customer care levels, and the highest customer satisfaction. Nutan Housing Finance strongly believes that everyone should have a home and business they have always dreamed of having. 
+        The company is one of the fastest-growing entities in the realty sector with a difference that offers luxury for reasonable costs, excellent customer care levels, and the highest customer satisfaction. Mount City Developers Pvt. Ltd. strongly believes that everyone should have a home and business they have always dreamed of having. 
       </p>
       <p className="md:text-lg text-justify mt-4">
-        At Nutan Housing Finance—an innovative real estate company in Rajgir—we don’t just provide customers with a plot in Bihar to build their home or business. We also provide our customers with a wide range of top-notch amenities that allow them to live a healthy and comfortable lifestyle. We also focus on building better and smarter spaces, ensuring all our projects are designed to incorporate sustainable living practices.
+        At Mount City Developers Pvt. Ltd.—an innovative real estate company in Rajgir—we don’t just provide customers with a plot in Bihar to build their home or business. We also provide our customers with a wide range of top-notch amenities that allow them to live a healthy and comfortable lifestyle. We also focus on building better and smarter spaces, ensuring all our projects are designed to incorporate sustainable living practices.
       </p>
     </div>
   </div>

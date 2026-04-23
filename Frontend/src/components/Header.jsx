@@ -72,8 +72,8 @@ const Header = ({ openLogin, openEnq}) => {
         {/* Logo */}
         <Link to='/'>
           <div className="flex items-center">
-            <img src={Logo} alt="Nutan Housing Finance" className="md:w-20 md:h-10 w-14 h-8" />
-            <h1 className="text-lg lg:text-2xl ml-2 mt-[5px] font-semibold text-primary font-poppins">NUTAN HOUSING FINANCE</h1>
+            <img src={Logo} alt="Mount City Developers" className="md:w-20 md:h-10 w-14 h-8" />
+            <h1 className="text-lg lg:text-2xl ml-2 mt-[5px] font-semibold text-primary font-poppins">MOUNT CITY DEVELOPERS</h1>
           </div>
         </Link>
         

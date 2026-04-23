@@ -7,6 +7,7 @@ import { fetchDevData, resetAdvisorTotals } from '../../services/devApi.js';
 import LedgerTable from '../advisor/LedgerTable.jsx';
 import { useToast, useConfirm } from '../../context/AppProvider.jsx';
 import OwnerLogin from './OwnerLogin.jsx';
+import OwnerProjectMapsTab from './OwnerProjectMapsTab.jsx';
 
 const inr = (v) => `₹${(Number(v) || 0).toLocaleString('en-IN')}`;
 const fmt = (d) => d ? new Date(d).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }) : '—';
@@ -561,7 +562,7 @@ function MyPanelInner({ setAuthed }) {
   const { sorted: sortedAdvisors, Th: AdvTh } = useSorted(advisors, 'totalBusiness', 'desc');
   const { sorted: sortedPerf, Th: PerfTh } = useSorted(rev.map(a => ({ ...a })), 'totalBusiness', 'desc');
 
-  const TABS = ['📊 Dashboard', '🌳 Team', '📋 Customers', '🧑‍💼 Advisors', '📋 Payment Tracker', '💠 Commissions', '💰 Payouts', '📜 Logs', '📖 Ledger'];
+  const TABS = ['📊 Dashboard', '🌳 Team', '📋 Customers', '🧑‍💼 Advisors', '📋 Payment Tracker', '💠 Commissions', '💰 Payouts', '📜 Logs', '📖 Ledger', '🗺️ Project Maps'];
 
   const customTooltipInr = ({ active, payload, label }) => {
     if (!active || !payload?.length) return null;
@@ -598,7 +599,7 @@ function MyPanelInner({ setAuthed }) {
               <div className="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center text-2xl border border-indigo-100 shadow-sm">🏢</div>
               <div>
                 <div className="flex items-center gap-4">
-                  <h1 className="text-2xl xl:text-3xl font-black tracking-tight text-slate-800">Nutan Housing <span className="font-extrabold text-slate-400">| Owner</span></h1>
+                  <h1 className="text-2xl xl:text-3xl font-black tracking-tight text-slate-800">Mount City Developers <span className="font-extrabold text-slate-400">| Owner</span></h1>
                   <button onClick={loadPanelData} className="flex items-center gap-1.5 px-3 py-1.5 mt-1 rounded-md font-extrabold text-xs uppercase tracking-wider bg-indigo-50 border border-indigo-200 text-indigo-700 hover:bg-indigo-100 hover:text-indigo-800 shadow-sm transition-all whitespace-nowrap">🔄 Refresh</button>
                   <button onClick={() => { sessionStorage.removeItem('ownerToken'); setAuthed(false); }}
                     className="flex items-center gap-1.5 px-3 py-1.5 mt-1 rounded-md font-extrabold text-xs uppercase tracking-wider bg-red-50 border border-red-200 text-red-600 hover:bg-red-100 shadow-sm transition-all whitespace-nowrap">
@@ -1357,10 +1358,19 @@ function MyPanelInner({ setAuthed }) {
             <LedgerTable customers={dateFilteredCustomers} isOwner={true} />
           </div>
         )}
+
+        {/* ── TAB 9: PROJECT MAPS (VIEW ONLY) ── */}
+        {tab === 9 && (
+          <div className="bg-white/70 backdrop-blur-xl border border-white/50 shadow-2xl rounded-[2rem] p-6 lg:p-10 mb-8 max-w-full overflow-hidden transition-all duration-300">
+            <OwnerProjectMapsTab />
+          </div>
+        )}
+
+
       </div>
 
       <div className="border-t border-gray-100 bg-white mt-8 py-4 text-center">
-        <p className="text-[14px] text-gray-400">🏢 Nutan Housing Finance · Owner Panel · All data is live</p>
+        <p className="text-[14px] text-gray-400">🏢 Mount City Developers Pvt. Ltd. · Owner Panel · All data is live</p>
       </div>
     </div>
   );

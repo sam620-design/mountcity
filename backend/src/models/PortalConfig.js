@@ -3,11 +3,11 @@ import bcrypt from 'bcryptjs';
 
 const portalConfigSchema = new mongoose.Schema({
   // /dev portal credentials
-  devUsername: { type: String, default: 'nutan_dev' },
+  devUsername: { type: String, default: 'mountcity_dev' },
   devPasswordHash: { type: String, required: true },
 
   // /mypanel portal credentials
-  ownerUsername: { type: String, default: 'nutan_owner' },
+  ownerUsername: { type: String, default: 'mountcity_owner' },
   ownerPasswordHash: { type: String, required: true },
 
   // /mypanel second-factor secret word
@@ -36,11 +36,11 @@ export async function seedPortalConfig() {
   if (count === 0) {
     const salt = await bcrypt.genSalt(12);
     await PortalConfig.create({
-      devUsername: 'nutan_dev',
-      devPasswordHash: await bcrypt.hash('NutanDev@2025', salt),
-      ownerUsername: 'nutan_owner',
-      ownerPasswordHash: await bcrypt.hash('NutanOwner@2025', salt),
-      ownerSecretWordHash: await bcrypt.hash('SunriseNutan', salt),
+      devUsername: 'mountcity_dev',
+      devPasswordHash: await bcrypt.hash('MountCityDev@2025', salt),
+      ownerUsername: 'mountcity_owner',
+      ownerPasswordHash: await bcrypt.hash('MountCityOwner@2025', salt),
+      ownerSecretWordHash: await bcrypt.hash('SunriseMountCity', salt),
     });
     console.log('✅ Portal config seeded with default credentials');
   }

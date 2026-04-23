@@ -120,7 +120,7 @@ export default function DevLogin({ onSuccess }) {
           </div>
         </div>
 
-        <p className="text-center text-gray-700 text-xs mt-4">Nutan Housing — Internal Admin System</p>
+        <p className="text-center text-gray-700 text-xs mt-4">Mount City Developers — Internal Admin System</p>
       </div>
     </div>
   );

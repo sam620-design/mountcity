@@ -3,8 +3,9 @@ import { apiDev as API } from '../../config/api.js';
 import { fetchDevData, authorizeRegistration, resetAdvisorTotals, getPortalCredentials, updatePortalCredential } from '../../services/devApi.js';
 import { useToast, useConfirm } from '../../context/AppProvider.jsx';
 import DevLogin from './DevLogin.jsx';
+import ProjectMapsTab from './ProjectMapsTab.jsx';
 
-const TABS = ['📊 Overview', '🔔 Authorizations', '🧑‍💼 Advisors', '📋 Leads & Customers', '📨 Applications', '➕ Create Advisor', '🔑 Portal Settings'];
+const TABS = ['📊 Overview', '🔔 Authorizations', '🧑‍💼 Advisors', '📋 Leads & Customers', '📨 Applications', '➕ Create Advisor', '🔑 Portal Settings', '🗺️ Project Maps'];
 
 // ---- helpers ----
 const inr = (v) => `₹${(Number(v) || 0).toLocaleString('en-IN')}`;
@@ -825,6 +826,9 @@ function DevPortalInner({ setAuthed }) {
 
         {/* ═══ PORTAL SETTINGS TAB ═══ */}
         {tab === 6 && <PortalSettings toast={toast} />}
+
+        {/* ═══ PROJECT MAPS TAB ═══ */}
+        {tab === 7 && <ProjectMapsTab />}
       </div>
 
       {/* ═══ MODALS ═══ */}

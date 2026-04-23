@@ -94,7 +94,7 @@ export default function OwnerLogin({ onSuccess }) {
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-2xl bg-indigo-600/30 border border-indigo-500/40 flex items-center justify-center text-2xl shadow-lg">🏢</div>
               <div>
-                <h1 className="text-white font-black text-xl tracking-tight">Nutan Housing</h1>
+                <h1 className="text-white font-black text-xl tracking-tight">Mount City Developers</h1>
                 <p className="text-indigo-300 text-xs font-bold uppercase tracking-widest">Owner Dashboard</p>
               </div>
             </div>
@@ -222,7 +222,7 @@ export default function OwnerLogin({ onSuccess }) {
           </div>
         </div>
 
-        <p className="text-center text-white/20 text-xs mt-4">Nutan Housing Pvt. Ltd. — Owner Portal v2.0</p>
+        <p className="text-center text-white/20 text-xs mt-4">Mount City Developers Pvt. Ltd. — Owner Portal v2.0</p>
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 import Advisor from '../models/Advisor.js';
 import Customer from '../models/Customer.js';
 import Apply from '../models/Apply.js';
+import PlotMap from '../models/PlotMap.js';
 import bcrypt from 'bcryptjs';
 import { getCommissionSlab, lockCommissions, releaseCommissions, getAdvisorBadge } from '../utils/commissions.js';
 
@@ -474,5 +475,44 @@ export const devRecordAdvisorPayout = async (req, res) => {
   } catch (error) {
     console.error('Error recording advisor payout:', error);
     res.status(500).json({ message: 'Server error recording advisor payout' });
+  }
+};
+
+// --- Plot Management ---
+export const createPlot = async (req, res) => {
+  const { projectId, plotId, x, y, width, height, customer } = req.body;
+  try {
+    const newPlot = new PlotMap({ projectId, plotId, x, y, width, height, customer });
+    await newPlot.save();
+    res.status(201).json({ message: 'Plot created successfully', plot: newPlot });
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to create plot', error: err.message });
+  }
+};
+
+export const updatePlot = async (req, res) => {
+  const { id } = req.params;
+  const { plotId, x, y, width, height, customer } = req.body;
+  try {
+    const updated = await PlotMap.findByIdAndUpdate(
+      id,
+      { plotId, x, y, width, height, customer },
+      { new: true, runValidators: true }
+    );
+    if (!updated) return res.status(404).json({ message: 'Plot not found' });
+    res.status(200).json({ message: 'Plot updated successfully', plot: updated });
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to update plot', error: err.message });
+  }
+};
+
+export const deletePlot = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deleted = await PlotMap.findByIdAndDelete(id);
+    if (!deleted) return res.status(404).json({ message: 'Plot not found' });
+    res.status(200).json({ message: 'Plot deleted successfully' });
+  } catch (err) {
+    res.status(500).json({ message: 'Failed to delete plot', error: err.message });
   }
 };
