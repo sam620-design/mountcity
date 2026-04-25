@@ -3,7 +3,8 @@ import {
   getGlobalDevData, verifyAdvisorNode, overrideAdvisorCredentials,
   editAdvisor, deleteAdvisor, editCustomer, deleteCustomer,
   createAdvisor, deleteApplication, authorizeRegistration, resetAllAdvisorTotals, devAddPayment,
-  devRecordAdvisorPayout, createPlot, updatePlot, deletePlot
+  devRecordAdvisorPayout, createPlot, updatePlot, deletePlot,
+  getWebsiteEnquiries, deleteEnquiry
 } from '../controllers/devControllers.js';
 import { protectDev, protectDevOrOwner } from '../middlewares/authMiddleware.js';
 
@@ -36,5 +37,9 @@ router.post('/reset-advisor-totals', protectDev, resetAllAdvisorTotals);
 router.post('/plot', protectDev, createPlot);
 router.put('/plot/:id', protectDev, updatePlot);
 router.delete('/plot/:id', protectDev, deletePlot);
+
+// Website Enquiries
+router.get('/enquiries', protectDev, getWebsiteEnquiries);
+router.delete('/enquiry/:id', protectDev, deleteEnquiry);
 
 export default router;

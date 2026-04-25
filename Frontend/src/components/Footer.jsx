@@ -8,7 +8,7 @@ function Footer({ openLogin, openEnq }) {
     <div>
       <footer className="bg-[#181818] text-white pt-8">
         <div className="container max-w-7xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-3 gap-8">
-          
+
           {/* Company Info */}
           <div className="space-y-4 items-center justify-center lg:max-w-xs md:border-1 md:border-r border-gray-400 text-center lg:text-left">
             <Link to=''>
@@ -24,11 +24,11 @@ function Footer({ openLogin, openEnq }) {
               </p>
               <p className='mt-2 gap-2 flex justify-center lg:justify-start'>
                 <MdEmail className='text-primary w-4 h-4' />
-                <a href="mailto:info@mountcitydevelopers.in" className="hover:text-white">info@mountcitydevelopers.in</a>
+                <a href="mailto:info@mountcitydevelopers.in" className="hover:text-white">info@mountcitydevelopers.com</a>
               </p>
               <p className='mt-2 gap-2 flex justify-center lg:justify-start'>
                 <MdPhone className='text-primary w-4 h-4' />
-                <a href="tel:+919471613137" className="hover:text-white ">+91 9471613137</a> 
+                <a href="tel:+919471613137" className="hover:text-white ">+91 9471613137</a>
                 <a href="tel:+918539804930" className="hover:text-white">+91 8539804930</a>
               </p>
               <p className='mt-2 text-green-600 ml-6'>Open On Sunday</p>
@@ -50,7 +50,7 @@ function Footer({ openLogin, openEnq }) {
               <h3 className="text-base font-semibold text-primary">Support</h3>
               <ul className="space-y-2 mt-4 text-sm text-gray-400">
                 <li><Link onClick={openEnq} className="hover:text-primary">Enquire Now</Link></li>
-                <li><a  href="tel:+919471613137" className="hover:text-primary">Customer Support</a></li>
+                <li><a href="tel:+919471613137" className="hover:text-primary">Customer Support</a></li>
                 <li><Link to="/privacy-policy" className="hover:text-primary">Privacy & Policy</Link></li>
                 <li><Link to="/terms-conditions" className="hover:text-primary">Terms & Conditions</Link></li>
               </ul>
@@ -76,8 +76,8 @@ function Footer({ openLogin, openEnq }) {
 
         {/* Footer Bottom */}
         <div className="mt-4 border-t border-gray-400 pt-4 text-center text-gray-400 text-sm">
-          <p>© Mount City Developers Pvt. Ltd. 2024, All rights reserved.</p>
-          <p>Developed by <a href="https://prachar.com" target="_blank" rel="noreferrer" className="hover:text-primary">prachar.com</a></p>
+          <p>© Mount City Developers Pvt. Ltd. 2026, All rights reserved.</p>
+          <p>Developed by <a href="https://aevandigital.com" target="_blank" rel="noreferrer" className="hover:text-primary">Aevan Digital</a></p>
         </div>
       </footer>
     </div>

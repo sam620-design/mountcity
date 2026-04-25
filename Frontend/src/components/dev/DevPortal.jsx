@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { apiDev as API } from '../../config/api.js';
-import { fetchDevData, authorizeRegistration, resetAdvisorTotals, getPortalCredentials, updatePortalCredential } from '../../services/devApi.js';
+import { fetchDevData, authorizeRegistration, resetAdvisorTotals, getPortalCredentials, updatePortalCredential, fetchWebsiteEnquiries, deleteWebsiteEnquiry } from '../../services/devApi.js';
 import { useToast, useConfirm } from '../../context/AppProvider.jsx';
 import DevLogin from './DevLogin.jsx';
 import ProjectMapsTab from './ProjectMapsTab.jsx';
 
-const TABS = ['📊 Overview', '🔔 Authorizations', '🧑‍💼 Advisors', '📋 Leads & Customers', '📨 Applications', '➕ Create Advisor', '🔑 Portal Settings', '🗺️ Project Maps'];
+const TABS = ['📊 Overview', '🔔 Auth', '🧑‍💼 Advisors', '👥 Customers', '📨 Apps', '➕ New Adv', '⚙️ Settings', '🗺️ Maps', '📥 Website Leads'];
 
 // ---- helpers ----
 const inr = (v) => `₹${(Number(v) || 0).toLocaleString('en-IN')}`;
@@ -127,6 +127,7 @@ function DevPortalInner({ setAuthed }) {
   const [advisors, setAdvisors] = useState([]);
   const [customers, setCustomers] = useState([]);
   const [applications, setApplications] = useState([]);
+  const [websiteEnquiries, setWebsiteEnquiries] = useState([]);
   const [stats, setStats] = useState({});
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState(null);
@@ -192,11 +193,15 @@ function DevPortalInner({ setAuthed }) {
       setCustomers(result.data.customers);
       setApplications(result.data.applications);
       setStats(result.data.stats);
+
+      const enqRes = await fetchWebsiteEnquiries();
+      if (enqRes.ok) setWebsiteEnquiries(enqRes.data);
     } else {
       setLoadError(result.error || 'Failed to load dev data');
       setAdvisors([]);
       setCustomers([]);
       setApplications([]);
+      setWebsiteEnquiries([]);
       setStats({});
     }
     setLoading(false);
@@ -316,6 +321,15 @@ function DevPortalInner({ setAuthed }) {
     if (res.ok) { toast.success('Application deleted.', 'Deleted'); fetchData(); }
   };
 
+  /* ---- WEBSITE ENQUIRIES ACTIONS ---- */
+  const handleDeleteEnquiry = async (id) => {
+    const ok = await confirm({ title: 'Delete Lead?', message: 'Delete this website enquiry lead?', confirmText: 'Delete', type: 'danger' });
+    if (!ok) return;
+    const res = await deleteWebsiteEnquiry(id);
+    if (res.ok) { toast.success('Lead deleted.', 'Deleted'); fetchData(); }
+    else toast.error('Failed to delete.');
+  };
+
   /* ---- AUTHORIZATION ACTIONS ---- */
   const handleAuthAction = async (id, action) => {
     const res = await authorizeRegistration(id, action);
@@ -389,16 +403,16 @@ function DevPortalInner({ setAuthed }) {
       </div>
 
       {/* Tabs Menu */}
-      <div className="flex gap-0 border-b border-gray-700 bg-gray-900 px-6 overflow-x-auto relative">
+      <div className="flex border-b border-gray-700 bg-gray-900 px-2 relative overflow-hidden">
         {TABS.map((t, i) => (
           <button key={t} onClick={() => setTab(i)}
-            className={`px-5 py-4 font-bold text-xs uppercase tracking-wider whitespace-nowrap transition-colors border-b-2 ${tab === i ? 'border-blue-500 text-blue-400' : 'border-transparent text-gray-500 hover:text-gray-300'}`}>
+            className={`px-3 py-3 font-bold text-[10px] uppercase tracking-tighter whitespace-nowrap transition-colors border-b-2 ${tab === i ? 'border-blue-500 text-blue-400' : 'border-transparent text-gray-500 hover:text-gray-300'}`}>
             {t}
           </button>
         ))}
         <div className="ml-auto flex items-center pr-2 py-2">
-           <button onClick={() => handleResetTotals(null, 'Company')} disabled={resetting} className="bg-rose-900/40 hover:bg-rose-900 border border-rose-700 text-rose-300 font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-widest transition-all">
-             {resetting ? '⏳ Scanning...' : '⚙️ Recalculate ALL'}
+           <button onClick={() => handleResetTotals(null, 'Company')} disabled={resetting} className="bg-rose-900/40 hover:bg-rose-900 border border-rose-700 text-rose-300 font-bold px-3 py-1.5 rounded-lg text-[9px] uppercase tracking-tighter transition-all">
+             {resetting ? '⏳ ...' : '⚙️ Recalculate'}
            </button>
         </div>
       </div>
@@ -829,6 +843,67 @@ function DevPortalInner({ setAuthed }) {
 
         {/* ═══ PROJECT MAPS TAB ═══ */}
         {tab === 7 && <ProjectMapsTab />}
+
+        {/* ═══ WEBSITE ENQUIRIES TAB ═══ */}
+        {tab === 8 && (
+          <div className="space-y-4">
+            <div className="flex justify-between items-center">
+              <h2 className="text-lg font-black text-white uppercase tracking-tighter">📥 Website Enquiries ({websiteEnquiries.length})</h2>
+              <button onClick={() => downloadCSV(websiteEnquiries.map(e => ({
+                Date: fmt(e.createdAt), Name: e.name, Phone: e.phoneNumber, Email: e.email || '—',
+                Source: e.source, Message: e.message || '—', Address: e.address || '—'
+              })), 'website_leads.csv')}
+                className="bg-gray-700 hover:bg-gray-600 text-white font-bold px-4 py-2 rounded-lg text-xs uppercase">⬇ Export CSV</button>
+            </div>
+            
+            <div className="overflow-x-auto rounded-xl border border-gray-700 shadow-2xl">
+              <table className="w-full text-left bg-gray-900">
+                <thead className="bg-gray-800 text-gray-400 uppercase text-[10px] tracking-widest font-black">
+                  <tr>
+                    <th className="p-4">Date</th>
+                    <th className="p-4">Lead Info</th>
+                    <th className="p-4">Contact</th>
+                    <th className="p-4">Source</th>
+                    <th className="p-4">Message / Address</th>
+                    <th className="p-4 text-right">Action</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-gray-800 text-sm">
+                  {websiteEnquiries.length === 0 ? (
+                    <tr><td colSpan="6" className="p-20 text-center text-gray-600 italic">No website enquiries yet.</td></tr>
+                  ) : (
+                    websiteEnquiries.map(e => (
+                      <tr key={e._id} className="hover:bg-gray-800/50 transition-colors">
+                        <td className="p-4 text-xs text-gray-400 whitespace-nowrap">{fmt(e.createdAt)}</td>
+                        <td className="p-4 font-bold text-white">{e.name}</td>
+                        <td className="p-4 text-xs">
+                          <p className="text-white">{e.phoneNumber}</p>
+                          <p className="text-gray-500">{e.email || '—'}</p>
+                        </td>
+                        <td className="p-4">
+                          <span className={`px-2 py-0.5 rounded-md text-[10px] font-black uppercase border ${
+                            e.source === 'Career Page' ? 'bg-purple-900/30 border-purple-700 text-purple-300' :
+                            e.source === 'Contact Page' ? 'bg-blue-900/30 border-blue-700 text-blue-300' :
+                            'bg-yellow-900/30 border-yellow-700 text-yellow-300'
+                          }`}>
+                            {e.source || 'Popup'}
+                          </span>
+                        </td>
+                        <td className="p-4 text-xs text-gray-400 max-w-xs">
+                          {e.message && <p className="italic mb-1">"{e.message}"</p>}
+                          {e.address && <p className="text-[10px] opacity-60">📍 {e.address}</p>}
+                        </td>
+                        <td className="p-4 text-right">
+                          <button onClick={() => handleDeleteEnquiry(e._id)} className="text-red-500 hover:text-red-300 text-xl font-black">×</button>
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* ═══ MODALS ═══ */}

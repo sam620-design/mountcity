@@ -352,7 +352,7 @@ export const updateIncentive= async (req, res) => {
 
 //enquaries 
 export const enquariesForm=async (req, res) => {
-  const { name, phoneNumber, address } = req.body;
+  const { name, phoneNumber, address, email, message, source } = req.body;
 
   try {
     // Create a new enquiry
@@ -360,6 +360,9 @@ export const enquariesForm=async (req, res) => {
       name,
       phoneNumber,
       address,
+      email,
+      message,
+      source
     });
 
     // Save enquiry to the database

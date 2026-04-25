@@ -2,6 +2,7 @@ import Advisor from '../models/Advisor.js';
 import Customer from '../models/Customer.js';
 import Apply from '../models/Apply.js';
 import PlotMap from '../models/PlotMap.js';
+import Enquire from '../models/Enquire.js';
 import bcrypt from 'bcryptjs';
 import { getCommissionSlab, lockCommissions, releaseCommissions, getAdvisorBadge } from '../utils/commissions.js';
 
@@ -513,6 +514,26 @@ export const deletePlot = async (req, res) => {
     if (!deleted) return res.status(404).json({ message: 'Plot not found' });
     res.status(200).json({ message: 'Plot deleted successfully' });
   } catch (err) {
-    res.status(500).json({ message: 'Failed to delete plot', error: err.message });
+    res.status(500).json({ message: 'Error deleting plot', error: err.message });
+  }
+};
+
+// --- Website Enquiries ---
+export const getWebsiteEnquiries = async (req, res) => {
+  try {
+    const enquiries = await Enquire.find().sort({ createdAt: -1 });
+    res.status(200).json(enquiries);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching enquiries', error: error.message });
+  }
+};
+
+export const deleteEnquiry = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await Enquire.findByIdAndDelete(id);
+    res.status(200).json({ message: 'Enquiry deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Error deleting enquiry', error: error.message });
   }
 };

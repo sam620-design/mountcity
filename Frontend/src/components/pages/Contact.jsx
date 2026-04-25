@@ -25,7 +25,7 @@ function Contact() {
     setLoading(true);
 
     try {
-      const response = await submitEnquiry(formData);
+      const response = await submitEnquiry({ ...formData, source: 'Contact Page' });
       if (response) {
         setIsSubmitted(true); // Show success message
         setFormData({ name: '', phoneNumber: '', address: '' }); // Reset form

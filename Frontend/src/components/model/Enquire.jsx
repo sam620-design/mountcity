@@ -27,7 +27,7 @@ function Enquire({ closeEnq }) {
         setErrorMessage('Phone number must be exactly 10 digits long.');
         return;
       }
-      const response = await submitEnquiry(formData);
+      const response = await submitEnquiry({ ...formData, source: 'Popup Form' });
       console.log(response)
       if (response) {
         setIsSubmitted(true); // Show success message

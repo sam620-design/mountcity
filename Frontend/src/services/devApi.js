@@ -130,3 +130,28 @@ export async function updatePortalCredential(field, newValue) {
     return { ok: false, error: e.message };
   }
 }
+
+/** Website Enquiries */
+export async function fetchWebsiteEnquiries() {
+  const url = `${apiDev}/enquiries`;
+  try {
+    const r = await devFetch(url);
+    const d = await r.json();
+    if (!r.ok) return { ok: false, error: d.message };
+    return { ok: true, data: d };
+  } catch (e) {
+    return { ok: false, error: e.message };
+  }
+}
+
+export async function deleteWebsiteEnquiry(id) {
+  const url = `${apiDev}/enquiry/${id}`;
+  try {
+    const r = await devFetch(url, { method: 'DELETE' });
+    const d = await r.json();
+    if (!r.ok) return { ok: false, error: d.message };
+    return { ok: true, data: d };
+  } catch (e) {
+    return { ok: false, error: e.message };
+  }
+}

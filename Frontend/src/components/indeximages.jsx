@@ -31,6 +31,8 @@ import Blog2 from '../assets/blog2.jpg'
 import Blog3 from '../assets/blog3.jpg'
 import Pro1 from '../assets/plot11.jpg'
 import Pro2 from '../assets/nutan.jpg'
+import Pro3 from '../assets/proj2.png'
+import Pro4 from '../assets/proj3.png'
 import Lpdf from '../assets/lodipur new.pdf'
 import Lodhipur from '../assets/lodipur.jpg'
 import Raj1 from '../assets/rajgir.jpg'
@@ -43,7 +45,7 @@ import Lsvg from '../assets/lodipur.svg'
 import HitechSvg from '../assets/hitechcity.svg'
 import VatikaSvg from '../assets/VATIKANEWFINAL.svg'
 // import DwgL from '../assets/lodipur new.dwg'
-export{
+export {
   Schoolimg,
   Hospitalimg,
   Swimmingimg,
@@ -61,9 +63,9 @@ export{
   Img2,
   Img3,
   Lsvg,
-  Img4,Img5,Img6,Contactimg,Blogimg,Careerimg,
-  Gmailimg,Whatsappimg,Phoneimg,
+  Img4, Img5, Img6, Contactimg, Blogimg, Careerimg,
+  Gmailimg, Whatsappimg, Phoneimg,
   Lodhipur
- ,Locimg,Blog1,Blog2,Blog3,Pro1,Pro2,Lpdf,
- Raj1,Raj2,Raj3,Raj4,Raj5,Rin, HitechSvg, VatikaSvg
+  , Locimg, Blog1, Blog2, Blog3, Pro1, Pro2, Pro3, Pro4, Lpdf,
+  Raj1, Raj2, Raj3, Raj4, Raj5, Rin, HitechSvg, VatikaSvg
 }
