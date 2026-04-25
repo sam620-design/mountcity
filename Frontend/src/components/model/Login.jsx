@@ -2,9 +2,6 @@ import { useState,useEffect } from "react";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { advisorLogin, advisorSignup } from "../../services/advisorservice";
 import { useNavigate } from "react-router-dom";
-import { GoogleLogin } from '@react-oauth/google';
-import axios from "axios";
-import { apiAdvisors } from "../../config/api.js";
 
 function Login({ closeLogin }) {
   const [isLogin, setIsLogin] = useState(true);
@@ -144,29 +141,6 @@ function Login({ closeLogin }) {
   };
 
 
-const handleSuccess=async(response)=>{
-  try{
-    const res = await axios.post(`${apiAdvisors}/googleauth`, { tokenId:response.credential });
-    const { token, advisor } = res.data;
-    
-    // Save the token and advisor details (e.g., in sessionStorage)
-    sessionStorage.setItem('token', token);
-    console.log(token)
-
-    sessionStorage.setItem('advisorData', JSON.stringify(advisor));
-    axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-    // Redirect or perform actions after successful login
-    navigate('/advisor/dashboard');
-  }catch (error) {
-    console.error('Google login failed:', error);
-  }
-
-}
-
-const errorMsg=(error)=>{
-  console.log('Google Login Error',error)
-}
- 
   return (
     <div>
       <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 backdrop-blur-lg p-2">
@@ -274,16 +248,6 @@ const errorMsg=(error)=>{
                   ) : "Login"}
                 </button>
               </form>
-              <div className="mt-2">
-                <h1 className="text-center">or</h1>
-                {/* Google Sign-In Button Here */}
-                <div className="flex items-center justify-center ">
-    <button className="hover:scale-105 transition duration-500 ">
-      
-        <GoogleLogin onSuccess={handleSuccess} onError={errorMsg} />
-    </button>
-</div>
-              </div>
             </div>
           ) : (
             <div id="signup-form">

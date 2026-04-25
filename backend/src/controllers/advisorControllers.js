@@ -175,7 +175,7 @@ export const getAdvisorData = async (req, res) => {
 export const updateProfile = async (req, res) => {
   try {
     const { advisorId } = req.params;
-    const { profilePhoto, address, pan, aadhar, dob } = req.body;
+    const { profilePhoto, address, pan, aadhar, dob, bloodGroup } = req.body;
     
     // Authorization check
     if (req.advisorId !== advisorId) {
@@ -187,6 +187,7 @@ export const updateProfile = async (req, res) => {
 
     if (profilePhoto !== undefined) advisor.profilePhoto = profilePhoto;
     if (address !== undefined) advisor.address = address;
+    if (bloodGroup !== undefined) advisor.bloodGroup = bloodGroup;
     if (pan !== undefined) advisor.pan = pan;
     if (aadhar !== undefined) advisor.aadhar = aadhar;
     if (dob !== undefined) advisor.dob = dob;

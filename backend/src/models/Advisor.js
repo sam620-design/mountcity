@@ -8,6 +8,7 @@ const userSchema = new mongoose.Schema({
   pan:{type: String,default:'Not Provided'},
   aadhar:{type: String,default:'Not Provided' },
   address: { type: String, default: 'Not Provided' },
+  bloodGroup: { type: String, default: 'Not Provided' },
   profilePhoto: { type: String, default: '' },
   role: { type: String, required: true },
   password: { type: String, required: true },

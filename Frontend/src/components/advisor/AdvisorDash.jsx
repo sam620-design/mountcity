@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { RiMedalFill, RiUserStarLine, RiPhoneLine, RiMailLine, RiBankCardLine, RiShieldCheckFill, RiArrowRightSLine, RiPieChart2Fill, RiMapPinLine, RiCameraLine, RiLoader4Line, RiCalendarLine } from "react-icons/ri";
+import { RiMedalFill, RiUserStarLine, RiPhoneLine, RiMailLine, RiBankCardLine, RiShieldCheckFill, RiArrowRightSLine, RiPieChart2Fill, RiMapPinLine, RiCameraLine, RiLoader4Line, RiCalendarLine, RiDropFill, RiContactsBookLine } from "react-icons/ri";
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { Link } from 'react-router-dom';
 import { Profile } from '..';
 import { apiAdvisors } from '../../config/api.js';
+import IdCardModal from './IdCardModal';
 
 const AdvisorDash = () => {
   const [data, setData] = useState(null);
@@ -11,6 +12,11 @@ const AdvisorDash = () => {
   const [addressInput, setAddressInput] = useState('');
   const [isUploading, setIsUploading] = useState(false);
   const [chartData, setChartData] = useState([]);
+  const [showIdCardPrompt, setShowIdCardPrompt] = useState(false);
+  const [emergencyInput, setEmergencyInput] = useState('');
+  const [showIdCardModal, setShowIdCardModal] = useState(false);
+  const [isEditingBloodGroup, setIsEditingBloodGroup] = useState(false);
+  const [bloodGroupInput, setBloodGroupInput] = useState('');
 
   const formatDate = (dateString) => {
     if (!dateString) return 'Not Provided';
@@ -181,6 +187,43 @@ const AdvisorDash = () => {
         } catch(err) { console.error(err); }
   }
 
+  const submitBloodGroup = async () => {
+        try {
+          const token = sessionStorage.getItem('token');
+          const res = await fetch(`${apiAdvisors}/${data.id}/profile`, {
+             method: 'PUT',
+             headers: { 
+               'Content-Type': 'application/json',
+               'Authorization': `Bearer ${token}`
+             },
+             body: JSON.stringify({ bloodGroup: bloodGroupInput })
+          });
+          if (res.ok) {
+             const result = await res.json();
+             const updatedProfile = { ...data, bloodGroup: result.advisor.bloodGroup };
+             setData(updatedProfile);
+             sessionStorage.setItem('advisorData', JSON.stringify(updatedProfile));
+             setIsEditingBloodGroup(false);
+          } else {
+             alert('Failed to update blood group. Session may have expired.');
+          }
+        } catch(err) { console.error(err); }
+  }
+
+  const handleIdCardOk = () => {
+     if (!emergencyInput || !/^\d{10}$/.test(emergencyInput)) {
+        alert("Please enter a valid 10-digit emergency contact number.");
+        return;
+     }
+     setShowIdCardPrompt(false);
+     setShowIdCardModal(true);
+  };
+
+  const handleIdCardSkip = () => {
+     setShowIdCardPrompt(false);
+     setEmergencyInput('');
+  };
+
   if (!data) return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#0F3A62]"></div>
@@ -271,6 +314,9 @@ const AdvisorDash = () => {
                     <span className="inline-flex items-center px-2.5 py-0.5 rounded-md text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-100">
                       <RiShieldCheckFill className="mr-1" /> Verified
                     </span>
+                    <button onClick={() => setShowIdCardPrompt(true)} className="inline-flex items-center px-3 py-1 rounded-md text-xs font-bold bg-indigo-600 text-white hover:bg-indigo-700 transition-colors shadow-sm ml-2">
+                      <RiContactsBookLine className="mr-1.5" /> ID Card
+                    </button>
                   </div>
                 </div>
 
@@ -484,6 +530,35 @@ const AdvisorDash = () => {
                     <p className="text-slate-800 font-bold text-sm">{formatDate(data.dob)}</p>
                   </div>
                 </li>
+
+                <li className="flex items-start gap-3 bg-slate-50 p-2.5 rounded-lg border border-slate-100">
+                  <div className="bg-white text-rose-500 p-1.5 rounded-md shadow-sm border border-slate-100 mt-1">
+                    <RiDropFill size={16} />
+                  </div>
+                  <div className="w-full pr-1 shrink">
+                    <div className="flex justify-between items-center mb-0.5">
+                       <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Blood Group</p>
+                       <button onClick={() => { setIsEditingBloodGroup(!isEditingBloodGroup); setBloodGroupInput(data.bloodGroup || ''); }} className="text-[10px] text-blue-500 hover:text-blue-700 font-bold uppercase tracking-wider bg-white px-2 py-0.5 rounded shadow-sm border border-slate-200">Edit</button>
+                    </div>
+                    {isEditingBloodGroup ? (
+                       <div className="mt-2 flex flex-col space-y-2">
+                         <input 
+                            type="text"
+                            value={bloodGroupInput} 
+                            onChange={e => setBloodGroupInput(e.target.value)} 
+                            className="w-full border border-blue-200 outline-none focus:ring-2 focus:ring-blue-500 p-2 rounded-md text-sm text-slate-800 bg-white" 
+                            placeholder="e.g. O+, A-, B+"
+                         />
+                         <div className="flex justify-end space-x-2">
+                           <button onClick={() => setIsEditingBloodGroup(false)} className="text-slate-500 text-xs px-2 py-1 font-bold">Cancel</button>
+                           <button onClick={submitBloodGroup} className="bg-blue-600 text-white font-bold tracking-wider uppercase text-[10px] px-3 py-1.5 rounded shadow-sm">Save</button>
+                         </div>
+                       </div>
+                    ) : (
+                       <p className="text-slate-800 font-semibold text-xs leading-snug">{data.bloodGroup || 'Not Provided'}</p>
+                    )}
+                  </div>
+                </li>
               </ul>
             </div>
 
@@ -532,6 +607,41 @@ const AdvisorDash = () => {
 
         </div>
       </div>
+
+      {/* Emergency Contact Prompt */}
+      {showIdCardPrompt && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm p-4">
+           <div className="bg-white rounded-xl shadow-xl w-full max-w-sm overflow-hidden">
+              <div className="p-6">
+                 <h3 className="text-lg font-black text-slate-800 mb-2">Emergency Contact</h3>
+                 <p className="text-sm text-slate-500 mb-4 leading-relaxed">Please enter an emergency contact number to be printed on the back of your ID card.</p>
+                 <input 
+                    type="text" 
+                    value={emergencyInput}
+                    onChange={(e) => {
+                       const val = e.target.value.replace(/\D/g, '');
+                       if (val.length <= 10) setEmergencyInput(val);
+                    }}
+                    placeholder="Enter 10-digit phone number..."
+                    className="w-full border border-slate-300 rounded-lg p-3 text-sm focus:ring-2 focus:ring-indigo-500 outline-none mb-6 text-slate-800"
+                 />
+                 <div className="flex justify-end gap-3">
+                    <button onClick={handleIdCardSkip} className="px-4 py-2 rounded-lg font-bold text-slate-600 hover:bg-slate-100 transition-colors">Skip</button>
+                    <button onClick={handleIdCardOk} className="px-5 py-2 bg-indigo-600 text-white rounded-lg font-bold hover:bg-indigo-700 transition-colors shadow-sm">OK</button>
+                 </div>
+              </div>
+           </div>
+        </div>
+      )}
+
+      {/* ID Card Modal */}
+      {showIdCardModal && (
+         <IdCardModal 
+            data={data} 
+            emergencyContact={emergencyInput} 
+            onClose={() => { setShowIdCardModal(false); setEmergencyInput(''); }} 
+         />
+      )}
     </div>
   );
 }
