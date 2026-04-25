@@ -37,9 +37,9 @@ const IdCardModal = ({ data, emergencyContact, onClose }) => {
         </div>
 
         {/* Content (The Card) */}
-        <div className="p-8 overflow-auto bg-slate-100 flex justify-center items-center min-h-[600px]">
-           {/* Wrap IdCard in a container that scales down on smaller screens but renders full size for canvas */}
-           <div className="transform scale-75 md:scale-90 lg:scale-100 origin-top flex justify-center pb-10">
+        <div className="bg-slate-100 flex justify-center items-start pt-6 overflow-hidden h-[380px] w-full">
+           {/* Wrap IdCard in a container that scales down visually but renders full size for canvas */}
+           <div className="transform scale-[0.6] origin-top flex justify-center">
              <IdCard ref={cardRef} data={data} emergencyContact={emergencyContact} />
            </div>
         </div>
