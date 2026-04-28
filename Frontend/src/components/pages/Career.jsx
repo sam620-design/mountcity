@@ -136,7 +136,7 @@ function Career() {
             file:bg-indigo-50 file:text-black
             hover:file:bg-indigo-100"
                 />
-                <p className="text-xs text-gray-500 mt-1 italic">Note: Please also email your CV to info@mountcitydevelopers.in</p>
+                <p className="text-xs text-gray-500 mt-1 italic">Note: Please also email your CV to info@mountcitydevelopers.com</p>
               </div>
               <div className="mb-4">
                 <label htmlFor="message" className="block text-sm font-semibold text-gray-700">
@@ -183,7 +183,7 @@ function Career() {
             <br /><br />
             Take the next step in your career journey and join Mount City Developers today.
 
-            To shape the future of real estate and join our team, submit your CV to <a href="mailto:info@mountcitydevelopers.in"><b>info@mountcitydevelopers.in</b></a> We look forward to hearing from you!</p>
+            To shape the future of real estate and join our team, submit your CV to <a href="mailto:info@mountcitydevelopers.com"><b>info@mountcitydevelopers.com</b></a> We look forward to hearing from you!</p>
         </div>
       </div>
     </div>

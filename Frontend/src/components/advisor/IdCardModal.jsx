@@ -12,7 +12,13 @@ const IdCardModal = ({ data, emergencyContact, onClose }) => {
       const canvas = await html2canvas(cardRef.current, {
          scale: 3, // High resolution for print
          useCORS: true, // For cross-origin images
-         backgroundColor: null // Transparent background
+         backgroundColor: null, // Transparent background
+         onclone: (clonedDoc) => {
+            const wrapper = clonedDoc.getElementById('id-card-scale-wrapper');
+            if (wrapper) {
+               wrapper.style.transform = 'none';
+            }
+         }
       });
       const image = canvas.toDataURL("image/png");
       const link = document.createElement('a');
@@ -39,7 +45,7 @@ const IdCardModal = ({ data, emergencyContact, onClose }) => {
         {/* Content (The Card) */}
         <div className="bg-slate-100 flex justify-center items-start pt-6 overflow-hidden h-[380px] w-full">
            {/* Wrap IdCard in a container that scales down visually but renders full size for canvas */}
-           <div className="transform scale-[0.6] origin-top flex justify-center">
+           <div id="id-card-scale-wrapper" className="transform scale-[0.6] origin-top flex justify-center">
              <IdCard ref={cardRef} data={data} emergencyContact={emergencyContact} />
            </div>
         </div>

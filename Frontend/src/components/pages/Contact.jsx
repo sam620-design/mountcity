@@ -135,7 +135,7 @@ function Contact() {
               </div>
               <div>
                 <h4 className="font-semibold md:text-lg text-md">Email Us</h4>
-                <p><a href='mailto:info@mountcitydevelopers.in'>info@mountcitydevelopers.in</a></p>
+                <p><a href='mailto:info@mountcitydevelopers.com'>info@mountcitydevelopers.com</a></p>
               </div>
             </div>
 

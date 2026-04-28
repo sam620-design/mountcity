@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
 import { Link, useParams } from 'react-router-dom'
-import { Raj1, Raj2, Raj5, Raj3, Raj4, Clubimg, Schoolimg, Proj1img, Templeimg, Gymimg, Swimmingimg, Hospitalimg, Marketimg, Kidimg, Parkimg, Waterimg, Hallimg, Movieimg, Img1, Img2, Img3, Img4, Img5, Img6, Rin } from '../indeximages'
+import { Raj1, Raj2, Raj5, Raj3, Raj4, Clubimg, Schoolimg, Proj1img, Templeimg, Gymimg, Swimmingimg, Hospitalimg, Marketimg, Kidimg, Parkimg, Waterimg, Hallimg, Movieimg, Img1, Img2, Img3, Img4, Img5, Img6, Rin, Pro1, Pro3, Pro4 } from '../indeximages'
 import Scrolltop from '../model/Scrolltop'
 
 
@@ -34,7 +34,7 @@ And many more Government project coming to Rajgir....
           </p>
         </div>
       </div>`,
-    image: Proj1img,
+    image: Pro1,
     details: `<section class=" pb-4 mt-8 ">
     <div class=" flex  flex-wrap ">
      
@@ -142,7 +142,7 @@ At Nutan Villa, we specialize in providing prime residential plots that empower 
     mapLocation: 'https://www.google.com/maps/embed?...',
     address: 'Near KK University Phase II Lodipur, Rajgir,803116',
     phone: '+91 9471613137',
-    email: 'info@mountcitydevelopers.in',
+    email: 'info@mountcitydevelopers.com',
     propertyDetails: [
       { type: "35'x25'", area: "875 SQ.FT", count: 16 },
       { type: "25'x40'", area: "1000 SQ.FT", count: 35 },
@@ -180,7 +180,7 @@ And many more Government project coming to Rajgir....
           </p>
         </div>
       </div>`,
-    image: Proj1img,
+    image: Pro4,
     details: `<section class=" pb-4 mt-8 ">
     <div class=" flex  flex-wrap ">
      
@@ -280,7 +280,7 @@ At Hi-Tech city, we specialize in providing prime residential plots that empower
     mapLocation: 'https://www.google.com/maps/embed?...',
     address: 'Ujjarpur, Giriyak Road Rajgir, Opp :- Ordinance Factory Gate No.:-1',
     phone: '+91 9471613137',
-    email: 'info@mountcitydevelopers.in',
+    email: 'info@mountcitydevelopers.com',
     propertyDetails: [
       { type: "35'x25'", area: "875 SQ.FT", count: 16 },
       { type: "25'x40'", area: "1000 SQ.FT", count: 35 },
@@ -318,7 +318,7 @@ And many more Government project coming to Rajgir....
           </p>
         </div>
       </div>`,
-    image: Proj1img,
+    image: Pro3,
     details: `<section class=" pb-4 mt-8 ">
     <div class=" flex  flex-wrap ">
      
@@ -418,7 +418,7 @@ At Nutan Vatika, we specialize in providing prime residential plots that empower
     mapLocation: 'https://www.google.com/maps/embed?...',
     address: 'Ujjarpur, Giriyak Road Rajgir, Opp :- Ordinance Factory Gate No.:-2',
     phone: '+91 9471613137',
-    email: 'info@mountcitydevelopers.in',
+    email: 'info@mountcitydevelopers.com',
     propertyDetails: [
       { type: "45'x40' / 36'x50'", area: "1800 SQ.FT", count: 21 },
       { type: "40'x40'", area: "1600 SQ.FT", count: 36 },

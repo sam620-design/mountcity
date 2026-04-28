@@ -153,6 +153,32 @@ function Home() {
 </section>
 
 
+      {/* Achievements Section */}
+      <section className="bg-white py-12 border-t border-b border-gray-200">
+        <div className="container mx-auto max-w-7xl px-4 text-center">
+          <h2 className="text-3xl font-bold text-primary mb-2">Our Achievements</h2>
+          <p className="text-lg text-gray-600 mb-10">Milestones we're proud of.</p>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="p-4">
+              <h3 className="text-4xl font-extrabold text-yellow-500 mb-2">500+</h3>
+              <p className="text-gray-700 font-semibold">Happy Customers</p>
+            </div>
+            <div className="p-4">
+              <h3 className="text-4xl font-extrabold text-yellow-500 mb-2">50+</h3>
+              <p className="text-gray-700 font-semibold">Completed Projects</p>
+            </div>
+            <div className="p-4">
+              <h3 className="text-4xl font-extrabold text-yellow-500 mb-2">10+</h3>
+              <p className="text-gray-700 font-semibold">Years of Experience</p>
+            </div>
+            <div className="p-4">
+              <h3 className="text-4xl font-extrabold text-yellow-500 mb-2">100%</h3>
+              <p className="text-gray-700 font-semibold">Client Satisfaction</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials */}
       <section className="py-8 mx-4  " id="testimonials">
         <div className="container mx-auto text-center mb-8">

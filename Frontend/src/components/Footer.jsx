@@ -24,7 +24,7 @@ function Footer({ openLogin, openEnq }) {
               </p>
               <p className='mt-2 gap-2 flex justify-center lg:justify-start'>
                 <MdEmail className='text-primary w-4 h-4' />
-                <a href="mailto:info@mountcitydevelopers.in" className="hover:text-white">info@mountcitydevelopers.com</a>
+                <a href="mailto:info@mountcitydevelopers.com" className="hover:text-white">info@mountcitydevelopers.com</a>
               </p>
               <p className='mt-2 gap-2 flex justify-center lg:justify-start'>
                 <MdPhone className='text-primary w-4 h-4' />
@@ -75,9 +75,9 @@ function Footer({ openLogin, openEnq }) {
         </div>
 
         {/* Footer Bottom */}
-        <div className="mt-4 border-t border-gray-400 pt-4 text-center text-gray-400 text-sm">
+        <div className="mt-4 border-t border-gray-400 pt-4 text-center text-gray-400 text-sm pb-4">
           <p>© Mount City Developers Pvt. Ltd. 2026, All rights reserved.</p>
-          <p>Developed by <a href="https://aevandigital.com" target="_blank" rel="noreferrer" className="hover:text-primary">Aevan Digital</a></p>
+          <p>Developed by <a href="https://aevandigital.com" target="_blank" rel="noreferrer" className="font-bold bg-gradient-to-r from-red-500 via-orange-500 via-yellow-500 via-green-500 via-blue-500 to-purple-500 text-transparent bg-clip-text hover:opacity-80 transition-opacity">Aevan Digital</a></p>
         </div>
       </footer>
     </div>
