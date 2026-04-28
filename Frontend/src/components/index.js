@@ -32,6 +32,8 @@ import Emi from './pages/Emi_calc.jsx';
 import Scrolltop from './model/Scrolltop.jsx'
 
 import PDFviewer from "./pages/PDFviewer.jsx";
+import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
+import TermsConditions from "./pages/TermsConditions.jsx";
 import AdvisorDash from "./advisor/AdvisorDash.jsx";
 import AdHeader from "./advisor/AdHeader.jsx";
 import Team from "./advisor/Team.jsx";
@@ -87,6 +89,7 @@ export{
   AdvisorSales,
   Nutanim,
   Expert,
-  Profile
-
+  Profile,
+  PrivacyPolicy,
+  TermsConditions
 }

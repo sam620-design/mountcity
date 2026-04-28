@@ -1,5 +1,6 @@
 
 import { Aboutus,Mission,Scrolltop,Vision } from '..'
+import { FaHome, FaKey, FaHandshake, FaWallet } from 'react-icons/fa';
 function About() {
   return (
     <div className='font-poppins'>
@@ -86,6 +87,44 @@ If you want to buy a plot in Bihar at prime locations of Rajgir, Mount City Deve
   
           </div>
       </div>
+
+      {/* Why Choose Us Section */}
+      <section className="bg-gray-50 py-16">
+        <div className="container mx-auto max-w-7xl px-4 text-center">
+          <h2 className="text-3xl font-bold text-primary mb-2 uppercase tracking-wide">Why Choose Us</h2>
+          <p className="text-md text-gray-500 mb-12">We provide full service at every step.</p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-100 flex flex-col items-center text-center hover:shadow-md transition-shadow">
+              <div className="text-primary text-6xl mb-6 relative">
+                <FaHome />
+                <FaKey className="absolute bottom-0 right-[-10px] text-3xl text-gray-700 bg-white rounded-full p-1 shadow-sm" />
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 mb-4">Wide Range Of Properties</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                We offer thoughtfully planned residential plots in prime locations, giving you multiple options to choose from based on your needs and budget.
+              </p>
+            </div>
+            <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-100 flex flex-col items-center text-center hover:shadow-md transition-shadow">
+              <div className="text-primary text-6xl mb-6">
+                <FaHandshake />
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 mb-4">Trusted by thousands</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Our strong commitment to transparency, reliability, and customer satisfaction has earned the trust of numerous happy customers and investors nationwide.
+              </p>
+            </div>
+            <div className="bg-white p-8 rounded-lg shadow-sm border border-gray-100 flex flex-col items-center text-center hover:shadow-md transition-shadow">
+              <div className="text-primary text-6xl mb-6">
+                <FaWallet />
+              </div>
+              <h3 className="text-xl font-bold text-gray-800 mb-4">Financing made easy</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                With flexible monthly installment plans and customer-friendly payment options, we make land ownership simple, affordable, and stress-free.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
  
 </div>
   )

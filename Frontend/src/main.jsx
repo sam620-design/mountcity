@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, Route, createRoutesFromElements, RouterProvider } from 'react-router-dom'
-import { Home, About, Projects, Blogs, Contact, Career, Login, Enquire, Plot, Emi, AdvisorDash, Team, Incentive, CustomerDetails, CreateLead, AdvisorLeads, AdvisorSales } from './components/index.js'
+import { Home, About, Projects, Blogs, Contact, Career, Login, Enquire, Plot, Emi, AdvisorDash, Team, Incentive, CustomerDetails, CreateLead, AdvisorLeads, AdvisorSales, PrivacyPolicy, TermsConditions } from './components/index.js'
 import AdvisorLayout from './AdvisorLayout.jsx'
 import MainLayout from './MainLayout.jsx'
 import { GoogleOAuthProvider } from "@react-oauth/google"
@@ -28,9 +28,8 @@ const router = createBrowserRouter(
         <Route path="/blogs/:id" element={<AllBlogs />} />
         <Route path='/plot/:projectId' element={<Plot />} />
         <Route path='/emi_calc' element={<Emi />} />
-
-
-      </Route>
+        <Route path='/privacy-policy' element={<PrivacyPolicy />} />
+        <Route path='/terms-conditions' element={<TermsConditions />} />      </Route>
 
       <Route path="advisor" element={<AdvisorLayout />}>
         <Route path="dashboard" element={<AdvisorDash />} />

@@ -18,9 +18,16 @@ function Footer({ openLogin, openEnq }) {
               </div>
             </Link>
             <div className="text-gray-400 text-sm">
-              <p className='mt-2 gap-2 flex justify-center lg:justify-start'>
-                <MdLocationOn className='text-primary w-4 h-4' />
-                Jhunki Baba Road, Patel Nagar,<br />Near RDH School, Rajgir, 803116
+              <p className='mt-2 gap-2 flex justify-center lg:justify-start items-start'>
+                <MdLocationOn className='text-primary w-4 h-4 mt-1 flex-shrink-0' />
+                <a 
+                  href="https://maps.google.com/maps?q=Mount+City+Developers+Pvt.+Ltd.,+Patel+Nagar,+Jhunki+Baba+Road,+Rajgir,+Bihar" 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="hover:text-white text-center lg:text-left"
+                >
+                  Jhunki Baba Road, Patel Nagar,<br />Near RDH School, Rajgir, 803116
+                </a>
               </p>
               <p className='mt-2 gap-2 flex justify-center lg:justify-start'>
                 <MdEmail className='text-primary w-4 h-4' />
@@ -61,7 +68,7 @@ function Footer({ openLogin, openEnq }) {
           <div className='text-center lg:text-left lg:mx-auto'>
             <h3 className="text-bse font-semibold text-primary">Follow Us On</h3>
             <div className="flex justify-center lg:justify-start space-x-6 mt-4">
-              <a href="#" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-primary">
+              <a href="https://www.facebook.com/mountcity.developers/" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-primary">
                 <FaFacebookF size={24} />
               </a>
               <a href="https://www.instagram.com/mountcity.developers/" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-primary">

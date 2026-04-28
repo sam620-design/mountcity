@@ -160,20 +160,20 @@ function Home() {
           <p className="text-lg text-gray-600 mb-10">Milestones we're proud of.</p>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="p-4">
-              <h3 className="text-4xl font-extrabold text-yellow-500 mb-2">500+</h3>
-              <p className="text-gray-700 font-semibold">Happy Customers</p>
-            </div>
-            <div className="p-4">
-              <h3 className="text-4xl font-extrabold text-yellow-500 mb-2">50+</h3>
+              <h3 className="text-4xl font-extrabold text-yellow-500 mb-2">7+</h3>
               <p className="text-gray-700 font-semibold">Completed Projects</p>
             </div>
             <div className="p-4">
-              <h3 className="text-4xl font-extrabold text-yellow-500 mb-2">10+</h3>
+              <h3 className="text-4xl font-extrabold text-yellow-500 mb-2">800+</h3>
+              <p className="text-gray-700 font-semibold">Happy Customers</p>
+            </div>
+            <div className="p-4">
+              <h3 className="text-4xl font-extrabold text-yellow-500 mb-2">9+</h3>
               <p className="text-gray-700 font-semibold">Years of Experience</p>
             </div>
             <div className="p-4">
-              <h3 className="text-4xl font-extrabold text-yellow-500 mb-2">100%</h3>
-              <p className="text-gray-700 font-semibold">Client Satisfaction</p>
+              <h3 className="text-4xl font-extrabold text-yellow-500 mb-2">98%</h3>
+              <p className="text-gray-700 font-semibold">Customer Satisfaction</p>
             </div>
           </div>
         </div>
