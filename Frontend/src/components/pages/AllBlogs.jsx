@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { Blog1, Blog2,Blog3 } from '../indeximages';
+import { Helmet } from 'react-helmet-async';
+import { Blog1, Blog2, Blog3, Blog4, Blog5, Blog6 } from '../indeximages';
 import Scrolltop from '../model/Scrolltop';
 
 // Sample blog data for demonstration (Replace with dynamic data source)
@@ -91,7 +92,75 @@ const blogPosts = [
     image: Blog3,
     date: 'September 28, 2024',
   },
-  // Add more blog posts here
+  {
+    id: 4,
+    title: 'Top 5 Reasons to Invest in Real Estate in Rajgir',
+    content: `<p class="my-3">
+        Rajgir is rapidly emerging as a hotspot for real estate investment, drawing attention from both residential buyers and commercial investors. The city’s unique blend of historical significance, growing infrastructure, and natural beauty makes it a highly attractive destination. Let's explore the top five reasons why investing in real estate here is a smart choice for your future.
+        <br><br>
+        <h2 class="text-lg font-semibold mb-2 mt-4">1. Booming Tourism Industry</h2>
+        Rajgir is a major pilgrimage and tourist destination, attracting thousands of visitors year-round. The consistent influx of tourists creates a robust demand for short-term rentals, hospitality ventures, and commercial spaces, promising excellent returns on investment for property owners.
+        <br><br>
+        <h2 class="text-lg font-semibold mb-2 mt-4">2. Rapid Infrastructure Development</h2>
+        The local government has significantly invested in upgrading Rajgir's infrastructure, including better roads, improved public transportation, and enhanced utility services. This continuous development not only improves the quality of life for residents but also steadily drives up property values.
+        <br><br>
+        <h2 class="text-lg font-semibold mb-2 mt-4">3. Affordable Entry Points</h2>
+        Compared to larger metropolitan areas, Rajgir still offers relatively affordable property prices. This allows investors to enter the market with a lower capital outlay while benefiting from the high potential for long-term capital appreciation as the city continues to grow.
+        <br><br>
+        <h2 class="text-lg font-semibold mb-2 mt-4">4. Educational and Healthcare Hub</h2>
+        With the establishment of new educational institutions and healthcare facilities, Rajgir is becoming a self-sustaining hub. This attracts families and professionals to the area, ensuring a steady demand for quality residential housing.
+        <br><br>
+        <h2 class="text-lg font-semibold mb-2 mt-4">5. Unmatched Natural Beauty</h2>
+        Surrounded by lush green hills and serene landscapes, Rajgir offers a peaceful, pollution-free living environment. As more people seek out homes away from the chaos of big cities, properties in Rajgir are highly sought after by retirees and those looking for holiday homes.
+    </p>`,
+    image: Blog4,
+    date: 'October 5, 2024',
+    seoDesc: 'Discover the top 5 reasons why investing in real estate in Rajgir is a smart, lucrative choice for your future.',
+  },
+  {
+    id: 5,
+    title: 'Navigating the Home Loan Process: Tips for First-Time Buyers',
+    content: `<p class="my-3">
+        Securing a home loan can be daunting for first-time buyers. The paperwork, the jargon, and the financial scrutiny can often feel overwhelming. However, with the right preparation and knowledge, you can navigate the process with confidence and secure the best possible financing for your dream home.
+        <br><br>
+        <h2 class="text-lg font-semibold mb-2 mt-4">Assess Your Financial Health</h2>
+        Before you even begin looking at properties or approaching lenders, it’s crucial to understand your financial standing. Check your credit score, as this will heavily influence the interest rates you’re offered. Aim to pay down existing debts to improve your debt-to-income ratio, which lenders closely scrutinize.
+        <br><br>
+        <h2 class="text-lg font-semibold mb-2 mt-4">Save for a Substantial Down Payment</h2>
+        While there are loan options that require smaller down payments, saving at least 20% can save you a significant amount of money in the long run. A larger down payment reduces your monthly mortgage payments, eliminates the need for private mortgage insurance (PMI), and signals to lenders that you are a low-risk borrower.
+        <br><br>
+        <h2 class="text-lg font-semibold mb-2 mt-4">Get Pre-Approved</h2>
+        Getting pre-approved for a mortgage is one of the smartest steps a first-time buyer can take. It gives you a clear understanding of your budget, helps narrow down your property search, and shows sellers that you are a serious and capable buyer when you make an offer.
+        <br><br>
+        <h2 class="text-lg font-semibold mb-2 mt-4">Compare Multiple Lenders</h2>
+        Don't settle for the first loan offer you receive. Different lenders offer different interest rates, loan terms, and closing costs. Take the time to shop around, compare offers from traditional banks, credit unions, and online lenders, and negotiate to ensure you’re getting the best possible deal.
+    </p>`,
+    image: Blog5,
+    date: 'October 12, 2024',
+    seoDesc: 'A step-by-step guide for first-time buyers on how to navigate the home loan process, improve credit scores, and secure the best mortgage rates.',
+  },
+  {
+    id: 6,
+    title: 'Interior Design Trends 2024: Making Your New House a Home',
+    content: `<p class="my-3">
+        Once you buy a house, the next exciting step is making it feel like your very own home. The way you design and decorate your space significantly impacts your daily mood and comfort. Let's explore the top interior design trends for 2024 that seamlessly blend comfort, functionality, and aesthetic appeal.
+        <br><br>
+        <h2 class="text-lg font-semibold mb-2 mt-4">Warm and Earthy Color Palettes</h2>
+        Say goodbye to stark, cold minimalism. 2024 is all about warm, earthy tones. Think rich terracottas, warm ochres, deep olive greens, and soft, sandy neutrals. These colors create a cozy, inviting atmosphere that makes a house instantly feel like a sanctuary.
+        <br><br>
+        <h2 class="text-lg font-semibold mb-2 mt-4">Sustainable and Artisanal Decor</h2>
+        Homeowners are increasingly prioritizing sustainability and uniqueness. Mass-produced furniture is taking a backseat to upcycled pieces, sustainably sourced materials like bamboo and reclaimed wood, and handcrafted artisanal decor. These elements add character and a unique story to your home.
+        <br><br>
+        <h2 class="text-lg font-semibold mb-2 mt-4">Biophilic Design Elements</h2>
+        Bringing the outdoors in continues to be a dominant trend. Beyond just adding a few houseplants, biophilic design in 2024 involves maximizing natural light, incorporating indoor water features, and using organic shapes and textures in furniture and architecture to foster a deep connection with nature.
+        <br><br>
+        <h2 class="text-lg font-semibold mb-2 mt-4">Multi-Functional Spaces</h2>
+        With the rise of remote work and dynamic lifestyles, homes need to be adaptable. Multi-functional furniture (like ottomans with storage or fold-out desks) and flexible room layouts are highly popular. A guest room that easily converts into a home office or a home gym ensures every square foot is utilized efficiently.
+    </p>`,
+    image: Blog6,
+    date: 'October 18, 2024',
+    seoDesc: 'Explore the top interior design trends for 2024, including earthy tones, sustainable materials, and multi-functional spaces to transform your house into a home.',
+  }
 ];
 
 const AllBlogs = () => {
@@ -104,6 +173,12 @@ const AllBlogs = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>{blog.title} | Mount City Developers</title>
+        <meta name="description" content={blog.seoDesc || blog.title} />
+        <meta property="og:title" content={blog.title} />
+        <meta property="og:description" content={blog.seoDesc || blog.title} />
+      </Helmet>
       <Scrolltop/>
     <img src={blog.image} alt={blog.title} className="w-full h-96 object-cover rounded-lg mb-6" />
 

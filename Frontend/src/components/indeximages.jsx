@@ -29,6 +29,9 @@ import Locimg from '../assets/location.png'
 import Blog1 from '../assets/blog1.jpg'
 import Blog2 from '../assets/blog2.jpg'
 import Blog3 from '../assets/blog3.jpg'
+import Blog4 from '../assets/blog_rajgir_real_estate.png'
+import Blog5 from '../assets/blog_home_loan.png'
+import Blog6 from '../assets/blog_interior_design.png'
 import Pro1 from '../assets/plot11.jpg'
 import Pro2 from '../assets/nutan.jpg'
 import Pro3 from '../assets/proj2.png'
@@ -66,6 +69,6 @@ export {
   Img4, Img5, Img6, Contactimg, Blogimg, Careerimg,
   Gmailimg, Whatsappimg, Phoneimg,
   Lodhipur
-  , Locimg, Blog1, Blog2, Blog3, Pro1, Pro2, Pro3, Pro4, Lpdf,
+  , Locimg, Blog1, Blog2, Blog3, Blog4, Blog5, Blog6, Pro1, Pro2, Pro3, Pro4, Lpdf,
   Raj1, Raj2, Raj3, Raj4, Raj5, Rin, HitechSvg, VatikaSvg
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { Blog1, Blog2, Blog3, Blogimg } from '../indeximages';
+import { Helmet } from 'react-helmet-async';
+import { Blog1, Blog2, Blog3, Blog4, Blog5, Blog6, Blogimg } from '../indeximages';
 import Scrolltop from '../model/Scrolltop';
 function Blogs() {
  
@@ -26,11 +27,35 @@ function Blogs() {
         image: Blog3,
         date: 'September 20, 2024',
       },
-      // Add more blog posts as needed
+      {
+        id: 4,
+        title: 'Top 5 Reasons to Invest in Real Estate in Rajgir',
+        description: 'Rajgir is rapidly emerging as a hotspot for real estate investment. Discover the top reasons why investing here is a smart choice for your future...',
+        image: Blog4,
+        date: 'October 5, 2024',
+      },
+      {
+        id: 5,
+        title: 'Navigating the Home Loan Process: Tips for First-Time Buyers',
+        description: 'Securing a home loan can be daunting for first-time buyers. Here is a step-by-step guide to help you navigate the process with confidence...',
+        image: Blog5,
+        date: 'October 12, 2024',
+      },
+      {
+        id: 6,
+        title: 'Interior Design Trends 2024: Making Your New House a Home',
+        description: 'Once you buy a house, the next step is making it feel like home. Explore the top interior design trends for 2024 that blend comfort and style...',
+        image: Blog6,
+        date: 'October 18, 2024',
+      },
     ];
   
     return (
       <div className="blogs-page   py-20">
+        <Helmet>
+          <title>Our Blogs | Mount City Developers</title>
+          <meta name="description" content="Read the latest real estate insights, tips on buying a home, and investment advice from Mount City Developers Pvt. Ltd. based in Rajgir, Bihar." />
+        </Helmet>
         <Scrolltop/>
         <img 
         src={Blogimg}
