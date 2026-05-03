@@ -655,6 +655,7 @@ function DevPortalInner({ setAuthed }) {
                 Name: c.name, Phone: c.phoneNumber, Email: c.email, Aadhar: c.aadhar, Address: c.address,
                 Project: c.projectName, Plot: c.plotNumber, Block: c.block || '', PlotSize: c.plotSize,
                 Status: c.status, FinalAmount: c.finalAmount || 0, BookingAmount: c.bookingAmount || 0,
+                AmountPaid: c.amountPaid ?? c.bookingAmount ?? 0, Balance: Math.max(0, (c.finalAmount || 0) - (c.amountPaid ?? c.bookingAmount ?? 0)),
                 PaymentMode: c.paymentMode || '', Tenure: c.tenure || '', EMI: c.emi || '',
                 Advisor: c.advisor?.name || '', BookingDate: fmt(c.bookingDate), RegistrationDate: fmt(c.registrationDate)
               })), 'leads.csv')}
@@ -701,7 +702,8 @@ function DevPortalInner({ setAuthed }) {
                       </td>
                       <td className="p-4 text-xs">
                         <p className="text-yellow-300 font-black">Final: {inr(c.finalAmount)}</p>
-                        <p className="text-green-400 mt-0.5">Paid: {inr(c.bookingAmount)}</p>
+                        <p className="text-green-400 mt-0.5">Paid: {inr(c.amountPaid ?? c.bookingAmount)}</p>
+                        <p className="text-red-400 mt-0.5">Balance: {inr(Math.max(0, (c.finalAmount || 0) - (c.amountPaid ?? c.bookingAmount ?? 0)))}</p>
                         {c.extraCharges > 0 && <p className="text-orange-400">Extra: {inr(c.extraCharges)}</p>}
                         <p className="text-gray-500">Base: {inr(c.baseAmount)}</p>
                       </td>
