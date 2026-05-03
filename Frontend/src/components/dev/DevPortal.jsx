@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { apiDev as API } from '../../config/api.js';
 import { fetchDevData, authorizeRegistration, resetAdvisorTotals, getPortalCredentials, updatePortalCredential, fetchWebsiteEnquiries, deleteWebsiteEnquiry } from '../../services/devApi.js';
+import { devFetch } from '../../services/authFetch.js';
 import { useToast, useConfirm } from '../../context/AppProvider.jsx';
 import DevLogin from './DevLogin.jsx';
 import ProjectMapsTab from './ProjectMapsTab.jsx';
@@ -211,20 +212,20 @@ function DevPortalInner({ setAuthed }) {
 
   /* ---- ADVISOR ACTIONS ---- */
   const handleVerify = async (advisorId) => {
-    const res = await fetch(`${API}/verify`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ targetAdvisorId: advisorId, parentAdvisorId: hierarchySelection, customAdvisorId: customAdvisorIdV }) });
+    const res = await devFetch(`${API}/verify`, { method: 'PUT', body: JSON.stringify({ targetAdvisorId: advisorId, parentAdvisorId: hierarchySelection, customAdvisorId: customAdvisorIdV }) });
     if (res.ok) { toast.success('Advisor verified and bound to hierarchy!', 'Verified'); setShowVerifyModal(null); setCustomAdvisorIdV(''); fetchData(); }
-    else toast.error('Verification failed.');
+    else { const d = await res.json().catch(() => ({})); toast.error(d.message || 'Verification failed.'); }
   };
 
   const handleResetPassword = async (advisorId) => {
-    const res = await fetch(`${API}/reset-password`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ targetAdvisorId: advisorId, newPassword }) });
+    const res = await devFetch(`${API}/reset-password`, { method: 'POST', body: JSON.stringify({ targetAdvisorId: advisorId, newPassword }) });
     if (res.ok) { toast.success('Password overridden successfully!', 'Password Reset'); setShowPasswordModal(null); setNewPassword(''); fetchData(); }
     else toast.error('Failed — password must be 5+ chars.');
   };
 
   const handleSaveAdvisor = async () => {
     const { _id, connectedAdvisors, parentAdvisor, __v, customers: c, referralCode, date, ...fields } = editingAdvisor;
-    const res = await fetch(`${API}/advisor/${_id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(fields) });
+    const res = await devFetch(`${API}/advisor/${_id}`, { method: 'PUT', body: JSON.stringify(fields) });
     if (res.ok) { toast.success('Advisor details saved!', 'Saved'); setEditingAdvisor(null); fetchData(); }
     else toast.error('Update failed.');
   };
@@ -232,13 +233,13 @@ function DevPortalInner({ setAuthed }) {
   const handleDeleteAdvisor = async (id, name) => {
     const ok = await confirm({ title: 'Delete Advisor?', message: `DELETE advisor "${name}"? All their leads will be unassigned. This cannot be undone.`, confirmText: 'Delete', cancelText: 'Cancel', type: 'danger' });
     if (!ok) return;
-    const res = await fetch(`${API}/advisor/${id}`, { method: 'DELETE' });
+    const res = await devFetch(`${API}/advisor/${id}`, { method: 'DELETE' });
     if (res.ok) { toast.success(`${name} has been deleted.`, 'Advisor Deleted'); fetchData(); }
     else toast.error('Delete failed.');
   };
 
   const handleCreateAdvisor = async () => {
-    const res = await fetch(`${API}/advisor`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(newAdv) });
+    const res = await devFetch(`${API}/advisor`, { method: 'POST', body: JSON.stringify(newAdv) });
     const d = await res.json();
     if (res.ok) { toast.success(`Advisor "${newAdv.name}" created successfully!`, 'Advisor Created'); setNewAdv({ name: '', email: '', phoneNumber: '', password: '', advisorId: '', role: 'advisor', parentAdvisorId: 'MAIN_COMPANY' }); fetchData(); setTab(1); }
     else toast.error(d.message || 'Creation failed.');
@@ -247,7 +248,7 @@ function DevPortalInner({ setAuthed }) {
   /* ---- CUSTOMER ACTIONS ---- */
   const handleSaveCustomer = async () => {
     const { _id, advisor, __v, actualDate, bookingDate, registrationDate, ...fields } = editingCustomer;
-    const res = await fetch(`${API}/customer/${_id}`, { method: 'PUT', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...fields, advisor: typeof advisor === 'object' ? advisor?._id : advisor }) });
+    const res = await devFetch(`${API}/customer/${_id}`, { method: 'PUT', body: JSON.stringify({ ...fields, advisor: typeof advisor === 'object' ? advisor?._id : advisor }) });
     if (res.ok) { toast.success('Lead updated successfully!', 'Lead Saved'); setEditingCustomer(null); fetchData(); }
     else toast.error('Update failed.');
   };
@@ -255,7 +256,7 @@ function DevPortalInner({ setAuthed }) {
   const handleDeleteCustomer = async (id, name) => {
     const ok = await confirm({ title: 'Delete Lead?', message: `DELETE lead for "${name}"? This cannot be undone.`, confirmText: 'Delete', type: 'danger' });
     if (!ok) return;
-    const res = await fetch(`${API}/customer/${id}`, { method: 'DELETE' });
+    const res = await devFetch(`${API}/customer/${id}`, { method: 'DELETE' });
     if (res.ok) { toast.success(`Lead for ${name} deleted.`, 'Lead Deleted'); fetchData(); }
     else toast.error('Delete failed.');
   };
@@ -276,10 +277,8 @@ function DevPortalInner({ setAuthed }) {
       toast.error('Payment date/time cannot be in the future.');
       return;
     }
-    const token = sessionStorage.getItem('devToken');
-    const res = await fetch(`${API}/customer/${selectedPayCust._id}/payment`, {
+    const res = await devFetch(`${API}/customer/${selectedPayCust._id}/payment`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
       body: JSON.stringify({ amount: Number(payAmount), paymentDate: paymentDate.toISOString(), note: payNote })
     });
     if (res.ok) {
@@ -298,10 +297,8 @@ function DevPortalInner({ setAuthed }) {
     if (!bonusAdvisorId) { toast.error('Please select an advisor.'); return; }
     if (!bonusAmount || isNaN(bonusAmount) || Number(bonusAmount) <= 0) { toast.error('Enter a valid payout amount.'); return; }
     if (!bonusDate) { toast.error('Please select a payout date.'); return; }
-    const token = sessionStorage.getItem('devToken');
-    const res = await fetch(`${API}/customer/${selectedBonusCust._id}/advisor-payout`, {
+    const res = await devFetch(`${API}/customer/${selectedBonusCust._id}/advisor-payout`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
       body: JSON.stringify({ advisorId: bonusAdvisorId, amount: Number(bonusAmount), payoutDate: bonusDate, note: bonusNote })
     });
     if (res.ok) {
@@ -317,7 +314,7 @@ function DevPortalInner({ setAuthed }) {
   const handleDeleteApp = async (id) => {
     const ok = await confirm({ title: 'Delete Application?', message: 'Are you sure you want to delete this application enquiry?', confirmText: 'Delete', type: 'danger' });
     if (!ok) return;
-    const res = await fetch(`${API}/application/${id}`, { method: 'DELETE' });
+    const res = await devFetch(`${API}/application/${id}`, { method: 'DELETE' });
     if (res.ok) { toast.success('Application deleted.', 'Deleted'); fetchData(); }
   };
 
