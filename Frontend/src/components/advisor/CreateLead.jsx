@@ -253,12 +253,14 @@ function CreateLead() {
                   {/* Plot Size */}
                   <div>
                     <label className="block text-gray-700 font-bold mb-1 text-sm">Plot Size <span className="text-red-500">*</span></label>
-                    <select name="plotSize" value={leadData.plotSize} onChange={handleInputChange} required
-                      className="w-full border border-gray-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-indigo-100 outline-none bg-white">
-                      <option value="" disabled>Select Size</option>
-                      <option value="1200 Sq. feet">1200 Sq. feet</option>
-                      <option value="1600 Sq. feet">1600 Sq. feet</option>
-                    </select>
+                    <input list="plot-sizes" name="plotSize" value={leadData.plotSize} onChange={handleInputChange} required
+                      className="w-full border border-gray-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-indigo-100 outline-none bg-white"
+                      placeholder="Select or type size" />
+                    <datalist id="plot-sizes">
+                      <option value="1200 Sq. feet" />
+                      <option value="1600 Sq. feet" />
+                      <option value="2400 Sq. feet" />
+                    </datalist>
                   </div>
 
                   {/* Site Visited */}
