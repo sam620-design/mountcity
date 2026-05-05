@@ -238,6 +238,15 @@ function IncentiveDashboard() {
   const allTreeAdvisors = data ? getAllAdvisorsInTree(data) : [];
   const allTreeSales = allTreeAdvisors.flatMap(a => (a.customers || []));
 
+  // --- LIFETIME PAYOUT TRACKING ---
+  const totalPaidByCompany = allTreeSales.reduce((sum, c) => {
+    const myPayouts = (c.advisorPayouts || []).filter(p => 
+      (p.advisor?._id || p.advisor || '').toString() === myId
+    );
+    return sum + myPayouts.reduce((s, p) => s + (p.amount || 0), 0);
+  }, 0);
+  const remainingWalletBalance = Math.max(0, releasedVal - totalPaidByCompany);
+
   // Build commBreakdown from FULL tree (direct + downline)
   // rowEligible and isDirectSale are FROZEN at commission lock time (from DB) — not re-evaluated dynamically
   const commBreakdown = allTreeSales.reduce((acc, c) => {
@@ -622,7 +631,29 @@ function IncentiveDashboard() {
                  </div>
               </div>
 
-              {/* Lifetime Tracking Breakdown */}
+              {/* WALLET & PAYOUT STATUS (LIFETIME) */}
+              <div className="bg-yellow-50/50 p-6 rounded-2xl border border-yellow-100 mb-8 shadow-sm">
+                <h3 className="text-xs font-black text-yellow-600 uppercase tracking-widest mb-4">💳 Lifetime Wallet & Payout Status</h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="bg-white p-5 rounded-xl border border-emerald-100 shadow-sm flex flex-col justify-center items-center text-center">
+                    <p className="text-[10px] font-black text-emerald-500 uppercase tracking-widest mb-1">Total Released</p>
+                    <p className="text-3xl font-black text-emerald-700">₹{releasedVal.toLocaleString('en-IN')}</p>
+                    <p className="text-[9px] text-gray-400 font-bold mt-1 uppercase text-center">Total commission cleared for payout</p>
+                  </div>
+                  <div className="bg-white p-5 rounded-xl border border-blue-100 shadow-sm flex flex-col justify-center items-center text-center">
+                    <p className="text-[10px] font-black text-blue-500 uppercase tracking-widest mb-1">Company Paid</p>
+                    <p className="text-3xl font-black text-blue-700">₹{totalPaidByCompany.toLocaleString('en-IN')}</p>
+                    <p className="text-[9px] text-gray-400 font-bold mt-1 uppercase text-center">Amount disbursed to you</p>
+                  </div>
+                  <div className="bg-white p-5 rounded-xl border border-orange-100 shadow-sm flex flex-col justify-center items-center text-center">
+                    <p className="text-[10px] font-black text-orange-500 uppercase tracking-widest mb-1">Remaining Balance</p>
+                    <p className="text-3xl font-black text-orange-600">₹{remainingWalletBalance.toLocaleString('en-IN')}</p>
+                    <p className="text-[9px] text-gray-400 font-bold mt-1 uppercase text-center">Owed by company</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Monthly Tracking Breakdown */}
               <div className="flex flex-wrap justify-center gap-4 mb-8">
 
                 {/* LOCKED EARNED — filtered by month + eligibility gate */}
