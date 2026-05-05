@@ -237,6 +237,8 @@ function CreateLead() {
                       className="w-full border border-gray-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-indigo-100 outline-none bg-white">
                       <option value="" disabled>Select Project</option>
                       <option value="Nutan Villa(Rajgir)">Nutan Villa (Rajgir)</option>
+                      <option value="Hi-Tech City(Rajgir)">Hi-Tech City (Rajgir)</option>
+                      <option value="Nutan Vatika(Rajgir)">Nutan Vatika (Rajgir)</option>
                     </select>
                   </div>
 
