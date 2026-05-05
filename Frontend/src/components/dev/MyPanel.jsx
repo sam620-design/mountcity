@@ -1267,21 +1267,11 @@ function MyPanelInner({ setAuthed }) {
           customers.forEach(c => {
             const cName = c.name;
             const adv = c.advisor?.name || '—';
-            // Skip the payment that represents the booking — it is already captured as a BOOKING entry
-            let bookingAmtToSkip = c.bookingAmount || 0;
-            let skippedBooking = false;
-
-            // Sort payments by date to ensure we skip the earliest matching one (usually the booking)
             const sortedPmts = [...(c.payments || [])].sort((a, b) => new Date(a.date) - new Date(b.date));
 
             sortedPmts.forEach(p => {
               const pAmt = p.amount || 0;
-              // If this payment matches the booking amount and we haven't skipped it yet, dedup it
-              if (bookingAmtToSkip > 0 && !skippedBooking && pAmt === bookingAmtToSkip) {
-                skippedBooking = true;
-                return;
-              }
-              logs.push({ type: 'PAYMENT', date: new Date(p.date), customer: cName, advisor: adv, amount: pAmt, note: p.note || '', detail: `Payment — ${c.projectName} Plot ${c.plotNumber}` });
+              logs.push({ type: 'PAYIN', date: new Date(p.date), customer: cName, advisor: adv, amount: pAmt, note: p.note || '', detail: `PayIn — ${c.projectName} Plot ${c.plotNumber}` });
             });
             (c.advisorPayouts || []).forEach(p => {
               const pAdvId = (p.advisor?._id || p.advisor || '').toString();
@@ -1290,11 +1280,9 @@ function MyPanelInner({ setAuthed }) {
 
               logs.push({ type: 'PAYOUT', date: new Date(p.date), customer: cName, advisor: pAdvName, amount: p.amount || 0, note: p.note || '', detail: `Commission Payout for ${cName}` });
             });
-            if (c.bookingDate) logs.push({ type: 'BOOKING', date: new Date(c.bookingDate), customer: cName, advisor: adv, amount: c.bookingAmount || 0, note: '', detail: `Booked — ${c.paymentMode || ''} — ${c.projectName}` });
-            if (c.registrationDate) logs.push({ type: 'REGISTRATION', date: new Date(c.registrationDate), customer: cName, advisor: adv, amount: 0, note: '', detail: `Registration — ${c.projectName}` });
           });
           logs.sort((a, b) => b.date - a.date);
-          const TYPE_COLORS = { PAYMENT: 'bg-emerald-100 text-emerald-700', PAYOUT: 'bg-yellow-100 text-yellow-700', BOOKING: 'bg-blue-100 text-blue-700', REGISTRATION: 'bg-purple-100 text-purple-700' };
+          const TYPE_COLORS = { PAYIN: 'bg-emerald-100 text-emerald-700', PAYOUT: 'bg-yellow-100 text-yellow-700' };
           // logType and logSearch come from top-level state — no hooks inside here
           const filteredLogs = logs.filter(l => {
             const matchType = logType === 'ALL' || l.type === logType;
@@ -1309,7 +1297,7 @@ function MyPanelInner({ setAuthed }) {
                   <p className="text-[16px] text-gray-500 mt-1">{logs.length} total events recorded</p>
                 </div>
                 <div className="flex gap-2 flex-wrap">
-                  {['ALL', 'PAYMENT', 'PAYOUT', 'BOOKING', 'REGISTRATION'].map(t => (
+                  {['ALL', 'PAYIN', 'PAYOUT'].map(t => (
                     <button key={t} onClick={() => setLogType(t)} className={`px-4 py-2 rounded-xl text-[14px] font-black uppercase transition-all ${logType === t ? 'bg-slate-800 text-white' : 'bg-slate-100 text-slate-500 hover:bg-slate-200'}`}>{t}</button>
                   ))}
                   <input value={logSearch} onChange={e => setLogSearch(e.target.value)} placeholder="Search customer / advisor..." className="border border-slate-200 rounded-xl px-4 py-2 text-[14px] outline-none focus:border-indigo-400" />
@@ -1334,7 +1322,7 @@ function MyPanelInner({ setAuthed }) {
                         <td className="px-5 py-3"><span className={`text-[12px] font-black uppercase px-2 py-0.5 rounded-full ${TYPE_COLORS[l.type] || 'bg-gray-100 text-gray-500'}`}>{l.type}</span></td>
                         <td className="px-5 py-3 font-extrabold text-slate-900">{l.customer}</td>
                         <td className="px-5 py-3 text-slate-600">{l.advisor}</td>
-                        <td className={`px-5 py-3 text-right font-black ${l.type === 'PAYOUT' ? 'text-red-600' : (l.type === 'PAYMENT' || l.type === 'BOOKING' ? 'text-emerald-600' : 'text-slate-700')}`}>{l.amount > 0 ? inr(l.amount) : '—'}</td>
+                        <td className={`px-5 py-3 text-right font-black ${l.type === 'PAYOUT' ? 'text-red-600' : (l.type === 'PAYIN' ? 'text-emerald-600' : 'text-slate-700')}`}>{l.amount > 0 ? inr(l.amount) : '—'}</td>
                         <td className="px-5 py-3 text-[14px] text-slate-500">{l.detail}{l.note ? ` · ${l.note}` : ''}</td>
                       </tr>
                     ))}
