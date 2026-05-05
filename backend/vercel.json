@@ -9,7 +9,7 @@
         "headers": [
         {
           "key": "Access-Control-Allow-Origin",
-          "value": "https://nutan-housing-finance.onrender.com"
+          "value": "https://mountcity2.vercel.app"
         },
         {
           "key": "Access-Control-Allow-Methods",
