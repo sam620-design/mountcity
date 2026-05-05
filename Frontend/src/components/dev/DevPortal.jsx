@@ -556,7 +556,7 @@ function DevPortalInner({ setAuthed }) {
                 </thead>
                 <tbody className="divide-y divide-gray-800 text-sm">
                   {filteredAdvisors.map(adv => (
-                    <tr key={adv._id} className="hover:bg-gray-800/50 transition-colors align-top">
+                    <tr key={adv._id} onClick={() => setViewAdvisorProfile(adv)} className="hover:bg-gray-800/50 transition-colors align-top cursor-pointer group">
                       <td className="p-4">
                         <p className="text-white font-bold text-base">{adv.name}</p>
                         <p className="text-[10px] text-gray-600 font-mono break-all mt-0.5">{adv._id}</p>
