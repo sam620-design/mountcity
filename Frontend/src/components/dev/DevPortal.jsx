@@ -142,6 +142,7 @@ function DevPortalInner({ setAuthed }) {
   const [editingAdvisor, setEditingAdvisor] = useState(null);
   const [showCredsId, setShowCredsId] = useState(null);
   const [advisorSearch, setAdvisorSearch] = useState('');
+  const [viewAdvisorProfile, setViewAdvisorProfile] = useState(null);
 
   // Customer modals
   const [editingCustomer, setEditingCustomer] = useState(null);
@@ -407,11 +408,6 @@ function DevPortalInner({ setAuthed }) {
             {t}
           </button>
         ))}
-        <div className="ml-auto flex items-center pr-2 py-2">
-           <button onClick={() => handleResetTotals(null, 'Company')} disabled={resetting} className="bg-rose-900/40 hover:bg-rose-900 border border-rose-700 text-rose-300 font-bold px-3 py-1.5 rounded-lg text-[9px] uppercase tracking-tighter transition-all">
-             {resetting ? '⏳ ...' : '⚙️ Recalculate'}
-           </button>
-        </div>
       </div>
 
       <div className="p-4 md:p-8 max-w-screen-2xl mx-auto">
@@ -431,7 +427,7 @@ function DevPortalInner({ setAuthed }) {
                     <th className="pb-2 text-center">Team Size</th>
                   </tr></thead>
                   <tbody className="divide-y divide-gray-700/50">
-                    {[...rev].sort((a,b) => b.totalBusiness - a.totalBusiness).map((a,i) => (
+                    {[...rev].filter(a => a.verified).sort((a,b) => b.totalBusiness - a.totalBusiness).map((a,i) => (
                       <tr key={i} className="hover:bg-gray-700/30">
                         <td className="py-2 font-bold text-white">{a.name} {a.advisorId && <span className="text-yellow-400 text-xs ml-1">{a.advisorId}</span>}</td>
                         <td className="py-2 text-right text-emerald-400 font-bold">{inr(a.totalBusiness)}</td>
@@ -571,16 +567,14 @@ function DevPortalInner({ setAuthed }) {
                       <td className="p-4">
                         <p className="text-xs text-gray-300 font-mono">{adv.email}</p>
                         <div className="flex items-center gap-2 mt-1.5">
-                          <span className="text-xs font-mono">
-                            {showCredsId === adv._id
-                              ? <span className="text-green-300 bg-green-900/20 px-2 py-0.5 rounded">{adv.passwordPlain || <span className="text-gray-500 italic">Not set via portal</span>}</span>
-                              : <span className="text-gray-600 tracking-widest">••••••••</span>}
-                          </span>
-                          <button onClick={() => setShowCredsId(showCredsId === adv._id ? null : adv._id)}
+                            <div className="text-white font-mono bg-gray-900 px-2 py-1 rounded text-[11px] tracking-wider w-full overflow-hidden text-ellipsis whitespace-nowrap">
+                              {showCredsId === adv._id ? adv.passwordPlain || '—' : '••••••••'}
+                            </div>
+                          </div>
+                          <button onClick={(e) => { e.stopPropagation(); setShowCredsId(showCredsId === adv._id ? null : adv._id); }}
                             className="text-gray-500 hover:text-yellow-300 transition-colors text-base flex-shrink-0">
                             {showCredsId === adv._id ? '🙈' : '👁'}
                           </button>
-                        </div>
                       </td>
                       <td className="p-4 text-xs">
                         <p>PAN: <span className="text-white font-mono">{adv.pan || 'Not Provided'}</span></p>
@@ -615,17 +609,11 @@ function DevPortalInner({ setAuthed }) {
                       <td className="p-4">
                         <div className="flex flex-col gap-1.5 items-end min-w-[110px]">
                           {!adv.verified && (
-                            <button onClick={() => { setShowVerifyModal(adv); setHierarchySelection('MAIN_COMPANY'); }}
+                            <button onClick={(e) => { e.stopPropagation(); setShowVerifyModal(adv); setHierarchySelection('MAIN_COMPANY'); }}
                               className="bg-green-700 hover:bg-green-600 text-white font-bold px-3 py-1.5 rounded text-xs uppercase w-full text-center">Verify & Bind</button>
                           )}
-                          <button onClick={() => setEditingAdvisor({ ...adv })}
-                            className="bg-blue-700 hover:bg-blue-600 text-white font-bold px-3 py-1.5 rounded text-xs uppercase w-full text-center">✏ Edit</button>
-                          <button onClick={() => { setShowPasswordModal(adv); setNewPassword(''); }}
+                          <button onClick={(e) => { e.stopPropagation(); setShowPasswordModal(adv); setNewPassword(''); }}
                             className="bg-orange-700 hover:bg-orange-600 text-white font-bold px-3 py-1.5 rounded text-xs uppercase w-full text-center">🔐 Password</button>
-                          <button onClick={() => handleResetTotals(adv._id, adv.name)} disabled={resetting}
-                            className="bg-purple-800 hover:bg-purple-700 text-white font-bold px-3 py-1.5 rounded text-xs uppercase w-full text-center">⚙️ Recalculate</button>
-                          <button onClick={() => handleDeleteAdvisor(adv._id, adv.name)}
-                            className="bg-red-900 hover:bg-red-700 text-white font-bold px-3 py-1.5 rounded text-xs uppercase w-full text-center">🗑 Delete</button>
                         </div>
                       </td>
                     </tr>
@@ -1098,6 +1086,50 @@ function DevPortalInner({ setAuthed }) {
           </div>
 
           <ModalButtons onCancel={resetBonus} onConfirm={handleBonusSubmit} confirmLabel="Record Payout" confirmClass="bg-yellow-600 hover:bg-yellow-500" />
+        </Modal>
+      )}
+
+      {/* Advisor Profile View Modal */}
+      {viewAdvisorProfile && (
+        <Modal title={`🧑‍💼 Advisor Profile: ${viewAdvisorProfile.name}`} onClose={() => setViewAdvisorProfile(null)}>
+          <div className="space-y-4 text-sm">
+            <div className="bg-gray-900 p-4 rounded-xl border border-gray-700">
+              <h4 className="font-bold text-gray-400 mb-2 uppercase text-xs">Primary Info</h4>
+              <div className="grid grid-cols-2 gap-4">
+                <div><span className="text-gray-500">Name:</span> <span className="text-white">{viewAdvisorProfile.name}</span></div>
+                <div><span className="text-gray-500">ID:</span> <span className="text-yellow-400">{viewAdvisorProfile.advisorId || '—'}</span></div>
+                <div><span className="text-gray-500">Email:</span> <span className="text-white">{viewAdvisorProfile.email}</span></div>
+                <div><span className="text-gray-500">Phone:</span> <span className="text-white">{viewAdvisorProfile.phoneNumber}</span></div>
+                <div><span className="text-gray-500">Status:</span> {viewAdvisorProfile.verified ? <span className="text-green-400">Verified</span> : <span className="text-red-400">Pending</span>}</div>
+                <div><span className="text-gray-500">Joined:</span> <span className="text-white">{fmt(viewAdvisorProfile.date)}</span></div>
+              </div>
+            </div>
+
+            <div className="bg-gray-900 p-4 rounded-xl border border-gray-700">
+              <h4 className="font-bold text-gray-400 mb-2 uppercase text-xs">KYC & Address</h4>
+              <div className="grid grid-cols-2 gap-4">
+                <div><span className="text-gray-500">PAN:</span> <span className="text-white font-mono">{viewAdvisorProfile.pan || 'Not Provided'}</span></div>
+                <div><span className="text-gray-500">Aadhar:</span> <span className="text-white font-mono">{viewAdvisorProfile.aadhar || 'Not Provided'}</span></div>
+                <div className="col-span-2"><span className="text-gray-500">Address:</span> <span className="text-white">{viewAdvisorProfile.address || '—'}</span></div>
+              </div>
+            </div>
+
+            <div className="bg-gray-900 p-4 rounded-xl border border-gray-700">
+              <h4 className="font-bold text-gray-400 mb-2 uppercase text-xs">Business & Hierarchy</h4>
+              <div className="grid grid-cols-2 gap-4">
+                <div><span className="text-gray-500">Badge/Slab:</span> <span className="text-amber-400">{viewAdvisorProfile.badge || 'Bronze'} (Slab {viewAdvisorProfile.currentSlab || 0})</span></div>
+                <div><span className="text-gray-500">Hierarchy:</span> <span className="text-purple-400">{viewAdvisorProfile.parentAdvisor?.name || 'Company Root'}</span></div>
+                <div><span className="text-gray-500">Total Business:</span> <span className="text-emerald-400 font-bold">{inr(viewAdvisorProfile.totalBusiness)}</span></div>
+                <div><span className="text-gray-500">Self Business:</span> <span className="text-blue-400 font-bold">{inr(viewAdvisorProfile.selfBusiness)}</span></div>
+                <div><span className="text-gray-500">Team Size:</span> <span className="text-white">{viewAdvisorProfile.connectedAdvisors?.length || 0}</span></div>
+              </div>
+            </div>
+
+            <div className="flex justify-end gap-3 pt-4 border-t border-gray-700 mt-6">
+              <button onClick={() => { setEditingAdvisor({ ...viewAdvisorProfile }); setViewAdvisorProfile(null); }} className="bg-blue-700 hover:bg-blue-600 text-white font-bold px-4 py-2 rounded text-xs uppercase">✏ Edit Profile</button>
+              <button onClick={() => { handleDeleteAdvisor(viewAdvisorProfile._id, viewAdvisorProfile.name); setViewAdvisorProfile(null); }} className="bg-red-900 hover:bg-red-700 text-white font-bold px-4 py-2 rounded text-xs uppercase">🗑 Delete Advisor</button>
+            </div>
+          </div>
         </Modal>
       )}
     </div>

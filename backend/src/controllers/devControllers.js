@@ -29,7 +29,7 @@ export const getGlobalDevData = async (req, res) => {
       acc[s] = (acc[s] || 0) + 1;
       return acc;
     }, {});
-    const revenueByAdvisor = advisors.map(a => ({ name: a.name, advisorId: a.advisorId, totalBusiness: a.totalBusiness || 0, selfBusiness: a.selfBusiness || 0, teamSize: a.connectedAdvisors?.length || 0 }));
+    const revenueByAdvisor = advisors.map(a => ({ name: a.name, advisorId: a.advisorId, verified: a.verified, totalBusiness: a.totalBusiness || 0, selfBusiness: a.selfBusiness || 0, teamSize: a.connectedAdvisors?.length || 0 }));
 
     res.status(200).json({ advisors, customers, applications, stats: { totalRevenue, statusCounts, revenueByAdvisor } });
   } catch (error) {
