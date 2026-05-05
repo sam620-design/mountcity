@@ -559,10 +559,7 @@ function DevPortalInner({ setAuthed }) {
                     <tr key={adv._id} onClick={() => setViewAdvisorProfile(adv)} className="hover:bg-gray-800/50 transition-colors align-top cursor-pointer group">
                       <td className="p-4">
                         <p className="text-white font-bold text-base">{adv.name}</p>
-                        <p className="text-[10px] text-gray-600 font-mono break-all mt-0.5">{adv._id}</p>
                         {adv.advisorId && <p className="text-xs text-yellow-400 font-black uppercase tracking-widest mt-1">{adv.advisorId}</p>}
-                        <p className="text-xs text-gray-500 mt-0.5">{adv.phoneNumber}</p>
-                        {adv.referralCode && <p className="text-xs text-cyan-500 mt-0.5">Ref: {adv.referralCode}</p>}
                       </td>
                       <td className="p-4">
                         <p className="text-xs text-gray-300 font-mono">{adv.email}</p>
