@@ -1,9 +1,6 @@
-// import http from 'http';
+import 'dotenv/config'; // Load env vars before anything else
 import app from './app.js';
 import connectDB from './db/index.js';  // Your DB connection
-import dotenv from 'dotenv';
-
-dotenv.config();  // Load environment variables
 
 const PORT = process.env.PORT || 5000;
 
