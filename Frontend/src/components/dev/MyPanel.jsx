@@ -1297,7 +1297,7 @@ function MyPanelInner({ setAuthed }) {
           const TYPE_COLORS = { PAYIN: 'bg-emerald-100 text-emerald-700', PAYOUT: 'bg-yellow-100 text-yellow-700', BOOKING: 'bg-blue-100 text-blue-700', REGISTRATION: 'bg-purple-100 text-purple-700' };
           // logType and logSearch come from top-level state — no hooks inside here
           const filteredLogs = logs.filter(l => {
-            const matchType = logType === 'ALL' || l.type === logType;
+            const matchType = logType === 'ALL' || l.type === logType || (logType === 'PAYIN' && (l.type === 'BOOKING' || l.type === 'REGISTRATION'));
             const matchSearch = !logSearch || l.customer.toLowerCase().includes(logSearch.toLowerCase()) || l.advisor.toLowerCase().includes(logSearch.toLowerCase());
             return matchType && matchSearch;
           });
