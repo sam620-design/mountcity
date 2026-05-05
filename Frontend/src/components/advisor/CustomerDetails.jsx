@@ -23,8 +23,7 @@ function CustomerDetails() {
 
 
   // --- BOOKING FORM STATE ---
-  const [bBlock, setBBlock] = useState('A');
-  const [customBlock, setCustomBlock] = useState('');
+  const [bBlock, setBBlock] = useState('');
   const [bPrice, setBPrice] = useState('');
   const [bPlotSize, setBPlotSize] = useState('');
   
@@ -97,8 +96,7 @@ function CustomerDetails() {
 
   const openBookModal = (customer) => {
     setSelectedBookCust(customer);
-    setBBlock('A');
-    setCustomBlock('');
+    setBBlock('');
     setBPlotSize(customer.plotSize ? customer.plotSize.split(' ')[0] : '1200');
   };
 
@@ -115,10 +113,7 @@ function CustomerDetails() {
       toast.error('All booking fields are mandatory.', 'Missing Fields');
       return;
     }
-    if (bBlock === 'Custom' && !customBlock.trim()) {
-      toast.error('Please enter the custom block name.', 'Missing Custom Block');
-      return;
-    }
+
     if (bPaymentMode === 'EMI' && (!bTenure || bTenure <= 0 || !bEmi)) {
        toast.error('Tenure and EMI fields are mandatory when Payment Mode is EMI.', 'Missing Fields');
        return;
@@ -134,11 +129,7 @@ function CustomerDetails() {
 
     try {
       const payload = {
-        block: bBlock === 'Custom' ? customBlock : bBlock,
-        price: bPrice,
-        extraCharges: extChargesVal,
-        baseAmount: baseAmt,
-        finalAmount: finalAmt,
+        block: bBlock, price: bPrice, extraCharges: extChargesVal, baseAmount: baseAmt, finalAmount: finalAmt,
         bookingDate: bDate,
         bookingAmount: bAmount,
         paymentMode: bPaymentMode,
@@ -305,16 +296,7 @@ function CustomerDetails() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
               <div>
                 <label className="block text-sm font-bold text-gray-700 mb-1">Block</label>
-                <select value={bBlock} onChange={e => { setBBlock(e.target.value); if(e.target.value !== 'Custom') setCustomBlock(''); }} className="w-full p-3 border border-gray-300 rounded-xl outline-none focus:ring-2 focus:ring-indigo-100">
-                  <option value="A">Block A</option>
-                  <option value="B">Block B</option>
-                  <option value="C">Block C</option>
-                  <option value="D">Block D</option>
-                  <option value="Custom">Custom (Type below)</option>
-                </select>
-                {bBlock === 'Custom' && (
-                  <input type="text" value={customBlock} onChange={e => setCustomBlock(e.target.value)} placeholder="Enter custom block" className="w-full mt-3 p-3 border border-gray-300 rounded-xl outline-none focus:ring-2 focus:ring-indigo-100" />
-                )}
+                <input type="text" value={bBlock} onChange={e => setBBlock(e.target.value)} placeholder="Enter block name" className="w-full p-3 border border-gray-300 rounded-xl outline-none focus:ring-2 focus:ring-indigo-100" />
               </div>
               <div>
                  <label className="block text-sm font-bold text-gray-700 mb-1">Price per sq.ft</label>
