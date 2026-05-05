@@ -20,7 +20,6 @@ function CreateLead() {
     projectName: '',
     plotNumber: '',
     plotSize: '',
-    block: '',
     dob: '',
     siteVisited: 'No'
   });
@@ -100,7 +99,6 @@ function CreateLead() {
         projectName: '',
         plotNumber: '',
         plotSize: '',
-        block: '',
         dob: '',
         siteVisited: 'No'
       });
@@ -262,21 +260,6 @@ function CreateLead() {
                       <option value="1200 Sq. feet" />
                       <option value="1600 Sq. feet" />
                       <option value="2400 Sq. feet" />
-                    </datalist>
-                  </div>
-
-                  {/* Block */}
-                  <div>
-                    <label className="block text-gray-700 font-bold mb-1 text-sm">Block</label>
-                    <input list="blocks" name="block" value={leadData.block} onChange={handleInputChange}
-                      className="w-full border border-gray-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-indigo-100 outline-none bg-white"
-                      placeholder="Select or type block (Optional)" />
-                    <datalist id="blocks">
-                      <option value="A" />
-                      <option value="B" />
-                      <option value="C" />
-                      <option value="D" />
-                      <option value="E" />
                     </datalist>
                   </div>
 
