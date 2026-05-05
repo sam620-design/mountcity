@@ -233,9 +233,7 @@ function Login({ closeLogin }) {
                       <FaEye className="text-gray-500" size={20} />
                     )}
                   </div>
-                  <a href="#" className="text-sm text-yellow-700">
-                    Forgot Password?
-                  </a>
+
                 </div>
                 <button
                   type="submit"
