@@ -556,9 +556,9 @@ function DevPortalInner({ setAuthed }) {
                 </thead>
                 <tbody className="divide-y divide-gray-800 text-sm">
                   {filteredAdvisors.map(adv => (
-                    <tr key={adv._id} onClick={() => setViewAdvisorProfile(adv)} className="hover:bg-gray-800/50 transition-colors align-top cursor-pointer group">
+                    <tr key={adv._id} className="hover:bg-gray-800/50 transition-colors align-top group">
                       <td className="p-4">
-                        <p className="text-white font-bold text-base">{adv.name}</p>
+                        <p onClick={() => setViewAdvisorProfile(adv)} className="text-white font-bold text-base cursor-pointer hover:text-blue-400 hover:underline inline-block">{adv.name}</p>
                         {adv.advisorId && <p className="text-xs text-yellow-400 font-black uppercase tracking-widest mt-1">{adv.advisorId}</p>}
                       </td>
                       <td className="p-4">
@@ -924,8 +924,6 @@ function DevPortalInner({ setAuthed }) {
             {[
               { label: 'Name', key: 'name' }, { label: 'Email', key: 'email' }, { label: 'Phone', key: 'phoneNumber' },
               { label: 'Advisor ID', key: 'advisorId' }, { label: 'PAN', key: 'pan' }, { label: 'Aadhar', key: 'aadhar' },
-              { label: 'Total Business (₹)', key: 'totalBusiness', type: 'number' }, { label: 'Self Business (₹)', key: 'selfBusiness', type: 'number' },
-              { label: 'Badge', key: 'badge' }, { label: 'Current Slab', key: 'currentSlab', type: 'number' },
             ].map(f => (
               <div key={f.key}>
                 <Label>{f.label}</Label>
@@ -933,19 +931,13 @@ function DevPortalInner({ setAuthed }) {
                   onChange={e => setEditingAdvisor({ ...editingAdvisor, [f.key]: e.target.value })} />
               </div>
             ))}
-            <div><Label>Address</Label><textarea value={editingAdvisor.address || ''}
+            <div className="sm:col-span-2"><Label>Address</Label><textarea value={editingAdvisor.address || ''}
               onChange={e => setEditingAdvisor({ ...editingAdvisor, address: e.target.value })}
               className="w-full bg-gray-900 border border-gray-600 text-white p-3 rounded-lg outline-none text-sm" rows={2} /></div>
-            <div><Label>Verified</Label>
+            <div className="sm:col-span-2"><Label>Account Status</Label>
               <Select value={editingAdvisor.verified ? 'true' : 'false'} onChange={e => setEditingAdvisor({ ...editingAdvisor, verified: e.target.value === 'true' })}>
                 <option value="true">✅ Verified — Active</option>
-                <option value="false">❌ Unverified — Blocked</option>
-              </Select>
-            </div>
-            <div><Label>Role</Label>
-              <Select value={editingAdvisor.role || 'advisor'} onChange={e => setEditingAdvisor({ ...editingAdvisor, role: e.target.value })}>
-                <option value="advisor">Advisor</option>
-                <option value="admin">Admin</option>
+                <option value="false">❌ Blocked — Cannot Login</option>
               </Select>
             </div>
           </div>
