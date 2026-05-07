@@ -101,6 +101,9 @@ function Enquire({ closeEnq }) {
                   required
                 />
               </div>
+              <p className="text-[10px] text-gray-500 mb-4 leading-tight italic">
+                * By clicking "Submit", I authorize Nutan Housing and its representatives to contact me via phone, SMS, or email regarding my enquiry.
+              </p>
               <button
                 type="submit"
                 disabled={loading}
