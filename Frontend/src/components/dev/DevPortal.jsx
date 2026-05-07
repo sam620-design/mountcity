@@ -170,6 +170,7 @@ function DevPortalInner({ setAuthed }) {
 
   // Create advisor form
   const [newAdv, setNewAdv] = useState({ name: '', email: '', phoneNumber: '', password: '', advisorId: '', role: 'advisor', parentAdvisorId: 'MAIN_COMPANY' });
+  const [showAddAdvisorModal, setShowAddAdvisorModal] = useState(false);
   const [resetting, setResetting] = useState(false);
 
   const handleResetTotals = async (advisorId = null, name = 'Company') => {
@@ -242,7 +243,7 @@ function DevPortalInner({ setAuthed }) {
   const handleCreateAdvisor = async () => {
     const res = await devFetch(`${API}/advisor`, { method: 'POST', body: JSON.stringify(newAdv) });
     const d = await res.json();
-    if (res.ok) { toast.success(`Advisor "${newAdv.name}" created successfully!`, 'Advisor Created'); setNewAdv({ name: '', email: '', phoneNumber: '', password: '', advisorId: '', role: 'advisor', parentAdvisorId: 'MAIN_COMPANY' }); fetchData(); setTab(1); }
+    if (res.ok) { toast.success(`Advisor "${newAdv.name}" created successfully!`, 'Advisor Created'); setNewAdv({ name: '', email: '', phoneNumber: '', password: '', advisorId: '', role: 'advisor', parentAdvisorId: 'MAIN_COMPANY' }); fetchData(); setShowAddAdvisorModal(false); }
     else toast.error(d.message || 'Creation failed.');
   };
 
@@ -534,7 +535,9 @@ function DevPortalInner({ setAuthed }) {
                 className="bg-gray-700 hover:bg-gray-600 text-white font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider">
                 ⬇ Export CSV
               </button>
-
+              <button onClick={() => setShowAddAdvisorModal(true)} className="bg-green-700 hover:bg-green-600 text-white font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider">
+                + Create New Advisor
+              </button>
               <span className="text-gray-500 text-xs ml-auto">{filteredAdvisors.length} of {advisors.length} shown</span>
             </div>
 
@@ -834,6 +837,47 @@ function DevPortalInner({ setAuthed }) {
           <Label>New Password</Label>
           <Input value={newPassword} onChange={e => setNewPassword(e.target.value)} type="text" placeholder="Min 5 characters..." />
           <ModalButtons onCancel={() => setShowPasswordModal(null)} onConfirm={() => handleResetPassword(showPasswordModal._id)} confirmLabel="Set Password" confirmClass="bg-red-600 hover:bg-red-500" />
+        </Modal>
+      )}
+
+      {/* Add Advisor Modal */}
+      {showAddAdvisorModal && (
+        <Modal title="➕ Create New Advisor" onClose={() => setShowAddAdvisorModal(false)} wide>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+              {[
+                { label: 'Full Name *', key: 'name', placeholder: 'e.g. Rahul Sharma' },
+                { label: 'Email *', key: 'email', placeholder: 'advisor@email.com', type: 'email' },
+                { label: 'Phone Number *', key: 'phoneNumber', placeholder: '9876543210' },
+                { label: 'Password *', key: 'password', placeholder: 'Min 5 characters', type: 'text' },
+                { label: 'Advisor ID (optional)', key: 'advisorId', placeholder: 'e.g. NH003042026' },
+              ].map(f => (
+                <div key={f.key}>
+                  <Label>{f.label}</Label>
+                  <Input type={f.type || 'text'} value={newAdv[f.key]} placeholder={f.placeholder}
+                    onChange={e => setNewAdv({ ...newAdv, [f.key]: e.target.value })} />
+                </div>
+              ))}
+              <div>
+                <Label>Role</Label>
+                <Select value={newAdv.role} onChange={e => setNewAdv({ ...newAdv, role: e.target.value })}>
+                  <option value="advisor">Advisor</option>
+                  <option value="admin">Admin</option>
+                </Select>
+              </div>
+              <div className="sm:col-span-2">
+                <Label>Parent / Hierarchy</Label>
+                <Select value={newAdv.parentAdvisorId} onChange={e => setNewAdv({ ...newAdv, parentAdvisorId: e.target.value })}>
+                  <option value="MAIN_COMPANY">— Root: Direct Company Branch —</option>
+                  {advisors.filter(a => a.verified).map(a => (
+                    <option key={a._id} value={a._id}>{a.name} ({a.advisorId || a.email})</option>
+                  ))}
+                </Select>
+              </div>
+            </div>
+            <div className="bg-yellow-900/20 border border-yellow-700/40 rounded-lg p-3 mb-6 text-xs text-yellow-300">
+              ⚠️ Advisor will be created as <strong>verified</strong> and immediately active on the platform.
+            </div>
+            <ModalButtons onCancel={() => setShowAddAdvisorModal(false)} onConfirm={handleCreateAdvisor} confirmLabel="Create Advisor Now" confirmClass="bg-green-600 hover:bg-green-500" />
         </Modal>
       )}
 
