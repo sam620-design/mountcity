@@ -1205,7 +1205,7 @@ function PendingEmiSection({ customers, myId }) {
               {/* Payment + Commission Timeline */}
               <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
                 <div className="px-6 py-4 border-b border-slate-100 bg-slate-50">
-                  <h4 className="text-sm font-black text-slate-700 uppercase tracking-wider">Payment & Commission Timeline</h4>
+                  <h4 className="text-sm font-black text-slate-700 uppercase tracking-wider">Payment Made to Company</h4>
                   <p className="text-xs text-slate-400 mt-0.5">Each payment shows commission released to you + any commission payout disbursed to you by the company on the same day</p>
                 </div>
                 {(!selected.payments || selected.payments.length === 0) ? (
@@ -1305,7 +1305,7 @@ function PendingEmiSection({ customers, myId }) {
                 return (
                   <div className="bg-yellow-50 rounded-xl border border-yellow-200 overflow-hidden">
                     <div className="px-6 py-4 border-b border-yellow-100 bg-yellow-50 flex justify-between items-center">
-                      <h4 className="text-sm font-black text-yellow-800 uppercase tracking-wider">💰 Commission Payouts from Company</h4>
+                      <h4 className="text-sm font-black text-yellow-800 uppercase tracking-wider">💰 Payment Made to Advisor</h4>
                       <div className="text-right">
                         <p className="text-xs text-yellow-600 font-bold">Commission Released: {inr(commReleased)}</p>
                         <p className="text-xs text-orange-600 font-black">Balance Owed to You: {inr(balanceOwed)}</p>
