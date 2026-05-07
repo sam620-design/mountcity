@@ -534,9 +534,7 @@ function DevPortalInner({ setAuthed }) {
                 className="bg-gray-700 hover:bg-gray-600 text-white font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider">
                 ⬇ Export CSV
               </button>
-              <button onClick={() => setTab(4)} className="bg-green-700 hover:bg-green-600 text-white font-bold px-4 py-2 rounded-lg text-xs uppercase tracking-wider">
-                + Create New Advisor
-              </button>
+
               <span className="text-gray-500 text-xs ml-auto">{filteredAdvisors.length} of {advisors.length} shown</span>
             </div>
 
