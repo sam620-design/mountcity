@@ -361,13 +361,24 @@ function AdvisorLeads() {
                <input type="date" value={rDate} onChange={e => setRDate(e.target.value)} max={todayStr} className="w-full p-2 border border-gray-300 rounded outline-none focus:ring-2 focus:ring-purple-500" />
             </div>
             
+            <div className="mb-4 bg-purple-50/50 p-4 rounded-lg border border-purple-100">
+               <div className="flex justify-between text-[10px] font-black uppercase tracking-widest mb-2">
+                 <span className="text-gray-500">Total Received so far</span>
+                 <span className="text-emerald-600">₹{(selectedRegCust.amountPaid || 0).toLocaleString('en-IN')}</span>
+               </div>
+               <div className="flex justify-between text-[10px] font-black uppercase tracking-widest">
+                 <span className="text-gray-500">Remaining Balance</span>
+                 <span className="text-orange-600">₹{Math.max(0, (Number(rFinalAmount) || 0) - (selectedRegCust.amountPaid || 0)).toLocaleString('en-IN')}</span>
+               </div>
+            </div>
+
             <div className="mb-6">
                <label className="block text-sm font-bold text-gray-800 mb-1">Final Settled Amount</label>
                <div className="relative">
                  <span className="absolute left-3 top-1/2 -translate-y-1/2 text-purple-700 font-black text-xl">₹</span>
                  <input type="number" value={rFinalAmount} onChange={e => setRFinalAmount(e.target.value)} className="w-full p-3 pl-8 border-2 border-purple-600 rounded-lg font-bold text-xl outline-none bg-purple-50" />
                </div>
-               {rFinalAmount && <p className="text-xs text-purple-500 font-semibold mt-1">= ₹{Number(rFinalAmount).toLocaleString('en-IN')}</p>}
+               {rFinalAmount && <p className="text-xs text-purple-500 font-semibold mt-1 tracking-tight">Updating final value to ₹{Number(rFinalAmount).toLocaleString('en-IN')}</p>}
             </div>
 
             <div className="mb-6 bg-red-50 p-4 border border-red-200 rounded-lg">
