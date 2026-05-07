@@ -263,8 +263,8 @@ function AdvisorLeads() {
             
             <div className="grid grid-cols-2 gap-4 mb-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Block</label>
-                <input type="text" value={bBlock} onChange={e => setBBlock(e.target.value)} placeholder="Enter block name" className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none" />
+                <label className="block text-sm font-medium text-gray-700 mb-1">Plot No.</label>
+                <input type="text" value={bBlock} onChange={e => setBBlock(e.target.value)} placeholder="Enter Plot No." className="w-full p-2 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none" />
               </div>
               <div>
                  <label className="block text-sm font-medium text-gray-700 mb-1">Price per sq.ft</label>
