@@ -40,7 +40,7 @@ function CreateLead() {
     setErrorMessage('');
 
     // Validate fields
-    const requiredFields = ['name', 'phoneNumber', 'email', 'address', 'aadhar', 'projectName', 'plotNumber', 'plotSize', 'dob'];
+    const requiredFields = ['name', 'fatherName', 'phoneNumber', 'email', 'address', 'aadhar', 'projectName', 'plotNumber', 'plotSize', 'dob', 'siteVisited'];
     const isEmpty = requiredFields.some(k => !String(leadData[k] || '').trim());
     if (isEmpty) {
       setErrorMessage('Please fill in all required fields.');
@@ -174,10 +174,9 @@ function CreateLead() {
                     placeholder="John Doe" />
                 </div>
 
-                {/* Father's Name */}
                 <div>
-                  <label className="block text-gray-700 font-bold mb-1 text-sm">Father's Name</label>
-                  <input type="text" name="fatherName" value={leadData.fatherName} onChange={handleInputChange}
+                  <label className="block text-gray-700 font-bold mb-1 text-sm">Father's Name <span className="text-red-500">*</span></label>
+                  <input type="text" name="fatherName" value={leadData.fatherName} onChange={handleInputChange} required
                     className="w-full border border-gray-300 rounded-xl p-3 text-sm focus:ring-2 focus:ring-indigo-100 outline-none"
                     placeholder="Father's full name" />
                 </div>
