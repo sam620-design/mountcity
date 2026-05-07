@@ -6,7 +6,7 @@ import { useToast, useConfirm } from '../../context/AppProvider.jsx';
 import DevLogin from './DevLogin.jsx';
 import ProjectMapsTab from './ProjectMapsTab.jsx';
 
-const TABS = ['📊 Overview', '🔔 Auth', '🧑‍💼 Advisors', '👥 Customers', '📨 Apps', '➕ New Adv', '⚙️ Settings', '🗺️ Maps', '📥 Website Leads'];
+const TABS = ['📊 Overview', '🔔 Auth', '🧑‍💼 Advisors', '👥 Customers', '⚙️ Settings', '🗺️ Maps', '📥 Website Leads'];
 
 // ---- helpers ----
 const inr = (v) => `₹${(Number(v) || 0).toLocaleString('en-IN')}`;
@@ -389,7 +389,7 @@ function DevPortalInner({ setAuthed }) {
             { label: 'Waiting', val: sc.WAITING || 0, color: 'text-gray-300' },
             { label: 'Booked', val: sc.BOOKED || 0, color: 'text-yellow-400' },
             { label: 'Registered', val: sc.REGISTERED || 0, color: 'text-purple-400' },
-            { label: 'Applications', val: applications.length, color: 'text-pink-400' },
+
             { label: 'Revenue', val: inr(stats.totalRevenue || 0), color: 'text-emerald-400' },
           ].map(s => (
             <div key={s.label} className="bg-gray-800 border border-gray-700 px-3 py-2 rounded-lg text-center min-w-[90px]">
@@ -740,96 +740,18 @@ function DevPortalInner({ setAuthed }) {
           </div>
         )}
 
-        {/* ═══ APPLICATIONS TAB ═══ */}
-        {tab === 4 && (
-          <div className="space-y-4">
-            <div className="flex justify-between items-center">
-              <h2 className="text-lg font-black text-white">📨 Job Applications ({applications.length})</h2>
-              <button onClick={() => downloadCSV(applications.map(a => ({ Name: a.name, Email: a.email, Phone: a.phoneNumber, Message: a.message, Date: a.date, CV: a.cv })), 'applications.csv')}
-                className="bg-gray-700 hover:bg-gray-600 text-white font-bold px-4 py-2 rounded-lg text-xs uppercase">⬇ Export CSV</button>
-            </div>
-            {applications.length === 0
-              ? <p className="text-gray-500 text-center py-16 italic">No applications found.</p>
-              : <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-                {applications.map(a => (
-                  <div key={a._id} className="bg-gray-800 border border-gray-700 rounded-xl p-5 hover:border-gray-500 transition-colors">
-                    <div className="flex justify-between items-start mb-3">
-                      <div>
-                        <p className="text-white font-black text-base">{a.name}</p>
-                        <p className="text-xs text-gray-400">{a.email}</p>
-                        <p className="text-xs text-gray-500">{a.phoneNumber}</p>
-                      </div>
-                      <button onClick={() => handleDeleteApp(a._id)} className="text-red-500 hover:text-red-300 text-lg font-black transition-colors">×</button>
-                    </div>
-                    <p className="text-xs text-gray-300 bg-gray-900 rounded-lg p-3 italic">"{a.message}"</p>
-                    <div className="flex justify-between items-center mt-3">
-                      <span className="text-xs text-gray-500">{a.date}</span>
-                      {a.cv && <a href={a.cv} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-400 hover:text-blue-300 font-bold">📄 View CV →</a>}
-                    </div>
-                  </div>
-                ))}
-              </div>}
-          </div>
-        )}
 
-        {/* ═══ CREATE ADVISOR TAB ═══ */}
-        {tab === 5 && (
-          <div className="max-w-2xl mx-auto">
-            <div className="bg-gray-800 border border-gray-700 rounded-xl p-8">
-              <h2 className="text-xl font-black text-white mb-6 uppercase tracking-wider">➕ Create New Advisor</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                {[
-                  { label: 'Full Name *', key: 'name', placeholder: 'e.g. Rahul Sharma' },
-                  { label: 'Email *', key: 'email', placeholder: 'advisor@email.com', type: 'email' },
-                  { label: 'Phone Number *', key: 'phoneNumber', placeholder: '9876543210' },
-                  { label: 'Password *', key: 'password', placeholder: 'Min 5 characters', type: 'text' },
-                  { label: 'Advisor ID (optional)', key: 'advisorId', placeholder: 'e.g. NH003042026' },
-                ].map(f => (
-                  <div key={f.key}>
-                    <label className="block text-xs font-bold uppercase text-gray-400 mb-1">{f.label}</label>
-                    <input type={f.type || 'text'} value={newAdv[f.key]} placeholder={f.placeholder}
-                      onChange={e => setNewAdv({ ...newAdv, [f.key]: e.target.value })}
-                      className="w-full bg-gray-900 border border-gray-600 text-white p-3 rounded-lg outline-none focus:border-blue-500 text-sm" />
-                  </div>
-                ))}
-                <div>
-                  <label className="block text-xs font-bold uppercase text-gray-400 mb-1">Role</label>
-                  <select value={newAdv.role} onChange={e => setNewAdv({ ...newAdv, role: e.target.value })}
-                    className="w-full bg-gray-900 border border-gray-600 text-white p-3 rounded-lg outline-none text-sm">
-                    <option value="advisor">Advisor</option>
-                    <option value="admin">Admin</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-xs font-bold uppercase text-gray-400 mb-1">Parent / Hierarchy</label>
-                  <select value={newAdv.parentAdvisorId} onChange={e => setNewAdv({ ...newAdv, parentAdvisorId: e.target.value })}
-                    className="w-full bg-gray-900 border border-gray-600 text-white p-3 rounded-lg outline-none text-sm">
-                    <option value="MAIN_COMPANY">— Root: Direct Company Branch —</option>
-                    {advisors.filter(a => a.verified).map(a => (
-                      <option key={a._id} value={a._id}>{a.name} ({a.advisorId || a.email})</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-              <div className="bg-yellow-900/20 border border-yellow-700/40 rounded-lg p-3 mb-6 text-xs text-yellow-300">
-                ⚠️ Advisor will be created as <strong>verified</strong> and immediately active on the platform.
-              </div>
-              <button onClick={handleCreateAdvisor}
-                className="w-full bg-green-600 hover:bg-green-500 text-white font-black py-3 rounded-xl text-sm uppercase tracking-wider transition-all hover:shadow-lg hover:shadow-green-900/40">
-                ➕ Create Advisor Now
-              </button>
-            </div>
-          </div>
-        )}
+
+
 
         {/* ═══ PORTAL SETTINGS TAB ═══ */}
-        {tab === 6 && <PortalSettings toast={toast} />}
+        {tab === 4 && <PortalSettings toast={toast} />}
 
         {/* ═══ PROJECT MAPS TAB ═══ */}
-        {tab === 7 && <ProjectMapsTab />}
+        {tab === 5 && <ProjectMapsTab />}
 
         {/* ═══ WEBSITE ENQUIRIES TAB ═══ */}
-        {tab === 8 && (
+        {tab === 6 && (
           <div className="space-y-4">
             <div className="flex justify-between items-center">
               <h2 className="text-lg font-black text-white uppercase tracking-tighter">📥 Website Enquiries ({websiteEnquiries.length})</h2>
